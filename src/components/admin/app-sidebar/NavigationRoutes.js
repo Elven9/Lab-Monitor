@@ -5,6 +5,20 @@ export const navigationRoutes = {
   },
   routes: [
     {
+      name: 'systemInfo',
+      displayName: 'menu.systemInfo',
+      meta: {
+        iconClass: 'vuestic-iconset-dashboard',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'hardware',
+          displayName: 'menu.hardware',
+        },
+      ],
+    },
+    {
       name: 'dashboard',
       displayName: 'menu.dashboard',
       meta: {

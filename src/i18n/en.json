@@ -275,6 +275,8 @@
     "simplified_chinese": "Simplified Chinese"
   },
   "menu": {
+    "systemInfo": "系統狀態 System Information",
+    "hardware": "硬體設備 Hardware",
     "auth": "Auth",
     "rating": "Rating",
     "buttons": "Buttons",

@@ -29,7 +29,7 @@ Vue.use(ColorThemePlugin,
     themes: {
       primary: '#FFB400',
       secondary: '#273A63',
-      success: '19A2F5',
+      success: '#19A2F5',
       info: '#2C82E0',
       danger: '#E82523',
       warning: '#FFC416',

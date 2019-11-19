@@ -20,6 +20,17 @@ export default new Router({
   routes: [
     ...demoRoutes,
     {
+      path: '/system-info',
+      component: AppLayout,
+      children: [
+        {
+          name: 'hardware',
+          path: 'hardware',
+          component: () => import('../pages/systemInfo.vue'),
+        },
+      ],
+    },
+    {
       path: '*',
       redirect: { name: 'dashboard' },
     },
