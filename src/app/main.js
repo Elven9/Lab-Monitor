@@ -27,8 +27,14 @@ Vue.use(ColorThemePlugin,
   {
     // Add or change theme colors here
     themes: {
-      // primary: '#f06595',
-      // blurple: '#7289DA',
+      primary: '#FFB400',
+      secondary: '#273A63',
+      success: '19A2F5',
+      info: '#2C82E0',
+      danger: '#E82523',
+      warning: '#FFC416',
+      gray: '#BABFC2',
+      dark: '#34495E',
     },
   })
 
