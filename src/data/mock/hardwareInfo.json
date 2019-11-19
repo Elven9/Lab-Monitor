@@ -1,0 +1,122 @@
+[
+  {
+    "nodeType": "1223dd-sae",
+    "nodeCount": 10,
+    "cpuType": "Intel Core i5-8500",
+    "cpuCapacity": 1000,
+    "cpuCount": 4,
+    "memorySize": "4GB",
+    "gpuType": "華碩 PH GTX1650",
+    "gpuCapacity": 1000,
+    "gpuCount": 32,
+    "memorySizePerGpu": "8GB"
+  },
+  {
+    "nodeType": "1223dd-sae",
+    "nodeCount": 10,
+    "cpuType": "Intel Core i5-8500",
+    "cpuCapacity": 1000,
+    "cpuCount": 4,
+    "memorySize": "4GB",
+    "gpuType": "華碩 PH GTX1650",
+    "gpuCapacity": 1000,
+    "gpuCount": 32,
+    "memorySizePerGpu": "8GB"
+  },
+  {
+    "nodeType": "1223dd-sae",
+    "nodeCount": 10,
+    "cpuType": "Intel Core i5-8500",
+    "cpuCapacity": 1000,
+    "cpuCount": 4,
+    "memorySize": "4GB",
+    "gpuType": "華碩 PH GTX1650",
+    "gpuCapacity": 1000,
+    "gpuCount": 32,
+    "memorySizePerGpu": "8GB"
+  },
+  {
+    "nodeType": "1223dd-sae",
+    "nodeCount": 10,
+    "cpuType": "Intel Core i5-8500",
+    "cpuCapacity": 1000,
+    "cpuCount": 4,
+    "memorySize": "4GB",
+    "gpuType": "華碩 PH GTX1650",
+    "gpuCapacity": 1000,
+    "gpuCount": 32,
+    "memorySizePerGpu": "8GB"
+  },
+  {
+    "nodeType": "1223dd-sae",
+    "nodeCount": 10,
+    "cpuType": "Intel Core i5-8500",
+    "cpuCapacity": 1000,
+    "cpuCount": 4,
+    "memorySize": "4GB",
+    "gpuType": "華碩 PH GTX1650",
+    "gpuCapacity": 1000,
+    "gpuCount": 32,
+    "memorySizePerGpu": "8GB"
+  },
+  {
+    "nodeType": "1223dd-sae",
+    "nodeCount": 10,
+    "cpuType": "Intel Core i5-8500",
+    "cpuCapacity": 1000,
+    "cpuCount": 4,
+    "memorySize": "4GB",
+    "gpuType": "華碩 PH GTX1650",
+    "gpuCapacity": 1000,
+    "gpuCount": 32,
+    "memorySizePerGpu": "8GB"
+  },
+  {
+    "nodeType": "1223dd-sae",
+    "nodeCount": 10,
+    "cpuType": "Intel Core i5-8500",
+    "cpuCapacity": 1000,
+    "cpuCount": 4,
+    "memorySize": "4GB",
+    "gpuType": "華碩 PH GTX1650",
+    "gpuCapacity": 1000,
+    "gpuCount": 32,
+    "memorySizePerGpu": "8GB"
+  },
+  {
+    "nodeType": "1223dd-sae",
+    "nodeCount": 10,
+    "cpuType": "Intel Core i5-8500",
+    "cpuCapacity": 1000,
+    "cpuCount": 4,
+    "memorySize": "4GB",
+    "gpuType": "華碩 PH GTX1650",
+    "gpuCapacity": 1000,
+    "gpuCount": 32,
+    "memorySizePerGpu": "8GB"
+  },
+  {
+    "nodeType": "1223dd-sae",
+    "nodeCount": 10,
+    "cpuType": "Intel Core i5-8500",
+    "cpuCapacity": 1000,
+    "cpuCount": 4,
+    "memorySize": "4GB",
+    "gpuType": "華碩 PH GTX1650",
+    "gpuCapacity": 1000,
+    "gpuCount": 32,
+    "memorySizePerGpu": "8GB"
+  },
+  {
+    "nodeType": "1223dd-sae",
+    "nodeCount": 10,
+    "cpuType": "Intel Core i5-8500",
+    "cpuCapacity": 1000,
+    "cpuCount": 4,
+    "memorySize": "4GB",
+    "gpuType": "華碩 PH GTX1650",
+    "gpuCapacity": 1000,
+    "gpuCount": 32,
+    "memorySizePerGpu": "8GB"
+  }
+]

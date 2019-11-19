@@ -1,4 +1,16 @@
 {
+  "systemInfo": {
+    "nodeType": "類別 Node Type",
+    "nodeCount": "數量 Node Count",
+    "cpuType": "處理器類型 CPU Type",
+    "cpuCapacity": "Capacity",
+    "cpuCount": "核心數量 CPU Core Count",
+    "memorySize": "記憶體大小 / Node",
+    "gpuType": "GPU 種類",
+    "gpuCapacity": "GPU Capacity",
+    "gpuCount": "GPU 核心數量",
+    "memorySizePerGpu": "記憶體大小 / GPU"
+  },
   "auth": {
     "agree": "I agree to",
     "createAccount": "Create account",
