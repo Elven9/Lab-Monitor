@@ -11,6 +11,12 @@
     "gpuCount": "GPU 核心數量",
     "memorySizePerGpu": "記憶體大小 / GPU"
   },
+  "resourceInfo": {
+    "gpu": "圖形處理器 Graphic Process Unit",
+    "cpu": "中央處理器 Central Process Unit",
+    "memory": "記憶體用量 Memory Usage",
+    "nodeStatus": "節點資源分配狀態 Node Status"
+  },
   "auth": {
     "agree": "I agree to",
     "createAccount": "Create account",
@@ -289,6 +295,8 @@
   "menu": {
     "systemInfo": "系統狀態 System Information",
     "hardware": "硬體設備 Hardware",
+    "resource": "資源管理 Resource Management",
+    "usage": "資源使用狀況 Resource Usage",
     "auth": "Auth",
     "rating": "Rating",
     "buttons": "Buttons",
