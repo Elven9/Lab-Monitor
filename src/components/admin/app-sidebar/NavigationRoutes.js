@@ -19,6 +19,20 @@ export const navigationRoutes = {
       ],
     },
     {
+      name: 'resource',
+      displayName: 'menu.resource',
+      meta: {
+        iconClass: 'vuestic-iconset-dashboard',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'usage',
+          displayName: 'menu.usage',
+        },
+      ],
+    },
+    {
       name: 'dashboard',
       displayName: 'menu.dashboard',
       meta: {

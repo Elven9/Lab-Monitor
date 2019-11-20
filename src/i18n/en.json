@@ -289,6 +289,8 @@
   "menu": {
     "systemInfo": "系統狀態 System Information",
     "hardware": "硬體設備 Hardware",
+    "resource": "資源管理 Resource Management",
+    "usage": "資源使用狀況 Resource Usage",
     "auth": "Auth",
     "rating": "Rating",
     "buttons": "Buttons",
