@@ -17,6 +17,17 @@
     "memory": "記憶體用量 Memory Usage",
     "nodeStatus": "節點資源分配狀態 Node Status"
   },
+  "groupInfo" :{
+    "groupSelect": "請選擇目標群組 Please Select Group",
+    "groupTable": {
+      "nodeType": "類別 Node Type",
+      "nodeCount":"數量 Node Count",
+      "cpuUsage": "CPU 用量狀況",
+      "hostMemoryUsage": "主機記憶體用量狀況",
+      "gpuUsage": "GPU 用量狀況",
+      "gpuMemoryUsage": "GPU 記憶體用量狀況"
+    }
+  },
   "auth": {
     "agree": "I agree to",
     "createAccount": "Create account",

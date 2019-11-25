@@ -2,9 +2,8 @@ const Mock = require('mockjs')
 
 exports.getHardwareSpec = () => {
   // Return Hardware Spec
-  console.log('dfdfdß')
   return Mock.mock({
-    'data|1-10': [{
+    'data|4': [{
       'node_type|1-10': '*',
       'node_count|1-10': 1,
       'cpu_type|1': [
@@ -17,7 +16,7 @@ exports.getHardwareSpec = () => {
       ],
       'cpu_capacity|1-10': 1,
       'cpu_count|1-4': 1,
-      'memory_size|1': [1, 2, 4, 8, 16, 32],
+      'memory_size|1': ['1 GB', '2 GB', '4 GB', '8 GB', '16 GB', '32 GB'],
       'gpu_type|1': [
         'NVIDIA® Tesla® T4',
         'NVIDIA® Tesla® V100',
@@ -27,7 +26,7 @@ exports.getHardwareSpec = () => {
       ],
       'gpu_capacity|1-10': 1,
       'gpu_count|1-4': 1,
-      'gpu_memory_size:|1': [1, 2, 4, 8, 16, 32],
+      'gpu_memory_size|1': ['1 GB', '2 GB', '4 GB', '8 GB', '16 GB', '32 GB'],
     }],
   })
 }
