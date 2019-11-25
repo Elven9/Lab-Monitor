@@ -1,9 +1,9 @@
 const _axios = require('axios')
 
 // API Setting
-const BASE_URL = 'https://need-to-change.com.tw'
+const BASE_URL = 'https://needtochange.com.tw'
 
-const axios = _axios({
+const axios = _axios.create({
   baseURL: BASE_URL,
 })
 

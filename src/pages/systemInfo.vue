@@ -2,99 +2,95 @@
   <div class="container">
     <h1 class="section-header">目前系統狀態 System Infomation</h1>
     <va-card>
-      <div class="multiple-table">
-        <va-data-table
-          :fields="fields1"
-          :data="users"
-          :per-page="10"
-          no-pagination
-        />
-        <va-data-table
-          :fields="fields2"
-          :data="users"
-          :per-page="10"
-          no-pagination
-        />
-        <va-data-table
-          :fields="fields3"
-          :data="users"
-          :per-page="10"
-          no-pagination
-        />
-      </div>
+      <va-data-table
+        :fields="fields1"
+        :data="data"
+        :per-page="10"
+        no-pagination
+      />
+      <va-data-table
+        :fields="fields2"
+        :data="data"
+        :per-page="10"
+        no-pagination
+      />
+      <va-data-table
+        :fields="fields3"
+        :data="data"
+        :per-page="10"
+        no-pagination
+      />
     </va-card>
   </div>
 </template>
 
 <script>
-import users from '../data/mock/hardwareInfo.json'
+import { getHardwareSpec } from '../api/system'
 
 export default {
   data () {
     return {
-      users: users.slice(),
+      data: [],
     }
   },
   computed: {
     fields1 () {
       return [{
-        name: 'nodeType',
+        name: 'node_type',
         title: this.$t('systemInfo.nodeType'),
-        sortField: 'nodeType',
         width: '30%',
       }, {
-        name: 'nodeCount',
+        name: 'node_count',
         title: this.$t('systemInfo.nodeCount'),
-        width: '30%',
+        width: '20%',
       }, {
-        name: 'cpuType',
+        name: 'cpu_type',
         title: this.$t('systemInfo.cpuType'),
-        sortField: 'cpuType',
-        width: '40%',
+        width: '50%',
       }]
     },
     fields2 () {
       return [{
-        name: 'cpuCapacity',
+        name: 'cpu_capacity',
         title: this.$t('systemInfo.cpuCapacity'),
-        sortField: 'cpuCapacity',
         width: '30%',
       }, {
-        name: 'cpuCount',
+        name: 'cpu_count',
         title: this.$t('systemInfo.cpuCount'),
         width: '30%',
       }, {
-        name: 'memorySize',
+        name: 'memory_size',
         title: this.$t('systemInfo.memorySize'),
-        sortField: 'memorySize',
-        width: '30%',
+        width: '40%',
       }]
     },
     fields3 () {
       return [ {
-        name: 'gpuType',
+        name: 'gpu_type',
         title: this.$t('systemInfo.gpuType'),
-        sortField: 'gpuType',
         width: '25%',
       }, {
-        name: 'gpuCapacity',
+        name: 'gpu_capacity',
         title: this.$t('systemInfo.gpuCapacity'),
-        sortField: 'gpuCapacity',
         width: '25%',
       }, {
-        name: 'gpuCount',
+        name: 'gpu_count',
         title: this.$t('systemInfo.gpuCount'),
-        sortField: 'gpuCount',
         width: '25%',
       }, {
-        name: 'memorySizePerGpu',
+        name: 'gpu_memory_size',
         title: this.$t('systemInfo.memorySizePerGpu'),
-        sortField: 'memorySizePerGpu',
         width: '25%',
       }]
     },
   },
   methods: {},
+  async mounted () {
+    // Calling Api
+    let data = await getHardwareSpec()
+
+    this.data = data.data
+  },
 }
 </script>
 
@@ -109,16 +105,14 @@ export default {
     margin: 20px 0px 20px 0px;
     font-size: 20px;
   }
+  .va-card {
+    min-width: 100%;
+  }
 
-  .multiple-table {
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
-
-    .va-data-table {
-      overflow-x: unset;
-      min-width: 100%;
-    }
+  .va-data-table {
+    overflow-x: unset;
+    min-width: 100%;
+    margin: 5px 0px 5px 0px;
   }
 }
 </style>
