@@ -30,3 +30,18 @@ exports.getHardwareSpec = () => {
     }],
   })
 }
+
+exports.getGroupInfo = () => {
+  return Mock.mock({
+    'data|4': [
+      {
+        'node_type|1-10': '*',
+        'node_count|1-10': 1,
+        'cpu_usage|0-100': 1,
+        'host_memory_usage|0-100': 1,
+        'gpu_usage|0-100': 1,
+        'gpu_memory_usage|0-100': 1,
+      },
+    ],
+  })
+}

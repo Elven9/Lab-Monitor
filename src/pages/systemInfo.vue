@@ -29,6 +29,7 @@
         searchable
         textBy="description"
         :options="groupSelectOption"
+        @input="triggerSelect"
       />
       <h2>Selected Group: {{ groupSelect === '' ? '尚未選擇' : groupSelect }}</h2>
       <table class="va-table groupInfo">
@@ -44,20 +45,20 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td>{{ 'Node 型別' }}</td>
-            <td>{{ 'Node 數量' }}</td>
+          <tr v-for="g in groupSpec" :key="g.id">
+            <td>{{ g.node_type }}</td>
+            <td>{{ g.node_count }}</td>
             <td>
-              <va-progress-bar :value="60" :color="returnColorCss('primary')">{{ `% (使用量 / 總量)` }}</va-progress-bar>
+              <va-progress-bar :value="g.cpu_usage" :color="returnColorCss(g.cpu_usage)">{{ `${g.cpu_usage}% (使用量 / 總量)` }}</va-progress-bar>
             </td>
             <td>
-              <va-progress-bar :value="60" :color="returnColorCss('primary')">{{ `% (使用量 / 總量)` }}</va-progress-bar>
+              <va-progress-bar :value="g.host_memory_usage" :color="returnColorCss(g.host_memory_usage)">{{ `${g.host_memory_usage}% (使用量 / 總量)` }}</va-progress-bar>
             </td>
             <td>
-              <va-progress-bar :value="60" :color="returnColorCss('primary')">{{ `% (使用量 / 總量)` }}</va-progress-bar>
+              <va-progress-bar :value="g.gpu_usage" :color="returnColorCss(g.gpu_usage)">{{ `${g.gpu_usage}% (使用量 / 總量)` }}</va-progress-bar>
             </td>
             <td>
-              <va-progress-bar :value="60" :color="returnColorCss('primary')">{{ `% (使用量 / 總量)` }}</va-progress-bar>
+              <va-progress-bar :value="g.gpu_memory_usage" :color="returnColorCss(g.gpu_memory_usage)">{{ `${g.gpu_memory_usage}% (使用量 / 總量)` }}</va-progress-bar>
             </td>
           </tr>
         </tbody>
@@ -68,7 +69,7 @@
 
 <script>
 import Mock from 'mockjs'
-import { getHardwareSpec } from '../api/system'
+import { getHardwareSpec, getGroupInfo } from '../api/system'
 
 import { hex2rgb } from '../services/color-functions'
 
@@ -135,14 +136,25 @@ export default {
     },
   },
   methods: {
-    returnColorCss (theme) {
-      return hex2rgb(this.$themes[theme], 1).css
+    returnColorCss (value) {
+      let targetTheme = ''
+
+      if (value < 25) targetTheme = this.$themes['success']
+      else if (value < 50) targetTheme = this.$themes['info']
+      else if (value < 75) targetTheme = this.$themes['warning']
+      else if (value <= 100) targetTheme = this.$themes['danger']
+      else targetTheme = this.$themes['gray']
+
+      return hex2rgb(targetTheme, 1).css
+    },
+    async triggerSelect () {
+      let groupInfo = await getGroupInfo(this.groupSelect)
+      this.groupSpec = groupInfo.data
     },
   },
   async mounted () {
     // Calling Api
     let hardwareSpec = await getHardwareSpec()
-
     this.hardwareSpec = hardwareSpec.data
 
     // Adding Mock Data
