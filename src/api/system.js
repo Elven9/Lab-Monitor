@@ -10,3 +10,8 @@ exports.getGroupInfo = (groupName) => {
   // return api('/system/groupInfo', method="POST", data= { group_name: groupName })
   return mockEntry.getGroupInfo()
 }
+
+exports.getUserInfo = (userName) => {
+  // return api('/system/userInfo', method="POST", data= { user_name: userName })
+  return mockEntry.getUserInfo()
+}

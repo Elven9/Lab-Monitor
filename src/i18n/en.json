@@ -28,6 +28,16 @@
       "gpuMemoryUsage": "GPU 記憶體用量狀況"
     }
   },
+  "userInfo" :{
+    "userSelect": "請選擇目標使用者 Please Select User",
+    "userTable": {
+      "nodeType": "類別 Node Type",
+      "cpuUsage": "CPU 用量狀況",
+      "hostMemoryUsage": "主機記憶體用量狀況",
+      "gpuUsage": "GPU 用量狀況",
+      "gpuMemoryUsage": "GPU 記憶體用量狀況"
+    }
+  },
   "auth": {
     "agree": "I agree to",
     "createAccount": "Create account",

@@ -29,7 +29,7 @@
         searchable
         textBy="description"
         :options="groupSelectOption"
-        @input="triggerSelect"
+        @input="triggerGroupSelect"
       />
       <h2>Selected Group: {{ groupSelect === '' ? '尚未選擇' : groupSelect }}</h2>
       <table class="va-table groupInfo">
@@ -64,12 +64,53 @@
         </tbody>
       </table>
     </va-card>
+    <h1 class="section-header">使用者個別狀態 User Infomation</h1>
+    <va-card>
+      <va-select
+        :label="$t('userInfo.userSelect')"
+        v-model="userSelect"
+        searchable
+        textBy="description"
+        :options="userSelectOption"
+        @input="triggerUserSelect"
+      />
+      <h2>Selected User: {{ userSelect === '' ? '尚未選擇' : userSelect }}</h2>
+      <table class="va-table userInfo">
+        <thead>
+          <tr>
+            <th>{{ $t('userInfo.userTable.nodeType') }}</th>
+            <th>{{ $t('userInfo.userTable.cpuUsage') }}</th>
+            <th>{{ $t('userInfo.userTable.hostMemoryUsage') }}</th>
+            <th>{{ $t('userInfo.userTable.gpuUsage') }}</th>
+            <th>{{ $t('userInfo.userTable.gpuMemoryUsage') }}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="u in userSpec" :key="u.id">
+            <td>{{ u.node_type }}</td>
+            <td>
+              <va-progress-bar :value="u.cpu_usage" :color="returnColorCss(u.cpu_usage)">{{ `${u.cpu_usage}% (使用量 / 總量)` }}</va-progress-bar>
+            </td>
+            <td>
+              <va-progress-bar :value="u.host_memory_usage" :color="returnColorCss(u.host_memory_usage)">{{ `${u.host_memory_usage}% (使用量 / 總量)` }}</va-progress-bar>
+            </td>
+            <td>
+              <va-progress-bar :value="u.gpu_usage" :color="returnColorCss(u.gpu_usage)">{{ `${u.gpu_usage}% (使用量 / 總量)` }}</va-progress-bar>
+            </td>
+            <td>
+              <va-progress-bar :value="u.gpu_memory_usage" :color="returnColorCss(u.gpu_memory_usage)">{{ `${u.gpu_memory_usage}% (使用量 / 總量)` }}</va-progress-bar>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </va-card>
   </div>
 </template>
 
 <script>
 import Mock from 'mockjs'
-import { getHardwareSpec, getGroupInfo } from '../api/system'
+import { getHardwareSpec, getGroupInfo, getUserInfo } from '../api/system'
 
 import { hex2rgb } from '../services/color-functions'
 
@@ -78,10 +119,15 @@ export default {
     return {
       hardwareSpec: [],
       groupSpec: [],
+      userSpec: [],
 
       // For Group Select
       groupSelect: '',
       groupSelectOption: [],
+
+      // For User Select
+      userSelect: '',
+      userSelectOption: [],
     }
   },
   computed: {
@@ -147,9 +193,13 @@ export default {
 
       return hex2rgb(targetTheme, 1).css
     },
-    async triggerSelect () {
+    async triggerGroupSelect () {
       let groupInfo = await getGroupInfo(this.groupSelect)
       this.groupSpec = groupInfo.data
+    },
+    async triggerUserSelect () {
+      let userInfo = await getUserInfo(this.userSelect)
+      this.userSpec = userInfo.data
     },
   },
   async mounted () {
@@ -160,6 +210,10 @@ export default {
     // Adding Mock Data
     for (let i = 0; i < 10; i++) {
       this.groupSelectOption.push(Mock.mock('@name'))
+    }
+
+    for (let i = 0; i < 10; i++) {
+      this.userSelectOption.push(Mock.mock('@name'))
     }
   },
 }
@@ -194,6 +248,12 @@ export default {
   .groupInfo {
     td {
       width: 17%;
+    }
+  }
+
+  .userInfo {
+    td {
+      width: 20%;
     }
   }
 }
