@@ -10,14 +10,46 @@
       <va-chart :data="chartData" :options="testOption" type="line" />
     </va-card>
     <va-card :title="$t('resourceInfo.nodeStatus')">
-      <div class="node-container">
-        <div class="pod-row">
-          <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+      <div class="node-list">
+        <div class="node-container">
+          <div class="pod-row">
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+          </div>
+          <div class="pod-row">
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+          </div>
         </div>
-        <div class="pod-row">
-          <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+        <div class="node-container">
+          <div class="pod-row">
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+          </div>
+          <div class="pod-row">
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+          </div>
+        </div>
+        <div class="node-container">
+          <div class="pod-row">
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+          </div>
+          <div class="pod-row">
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+          </div>
+        </div>
+        <div class="node-container">
+          <div class="pod-row">
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+          </div>
+          <div class="pod-row">
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+          </div>
         </div>
       </div>
     </va-card>
@@ -51,6 +83,10 @@ export default {
       testOptionForPie: {
         legend: {
           display: false,
+        },
+        title: {
+          display: true,
+          text: 'POD1',
         },
       },
       testOption: {
@@ -119,26 +155,34 @@ export default {
   margin-bottom: 30px;
 }
 
-.node-container {
+.node-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  max-width: 240px;
-  padding: 8px;
 
-  border: solid black 1px;
-  border-radius: 20px;
-
-  .pod-row {
-    width: 120px;
+  .node-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-width: 240px;
+    padding: 8px;
+    margin: 5px;
 
-    .va-chart {
-      margin: 5px;
+    border: solid black 1px;
+    border-radius: 20px;
+
+    .pod-row {
+      width: 120px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .va-chart {
+        margin: 5px;
+      }
     }
   }
 }
