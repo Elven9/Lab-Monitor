@@ -2,7 +2,51 @@
   <div>
     <!-- 輸入欄位，指定要看哪一些資料 -->
     <va-card :title="$t('resource.cardTitle.form')">
+      <div class="row">
+        <div class="flex xs6">
+          <va-select
+            :label="$t('resource.select.resourceType.title')"
+            v-model="resourceType"
+            textBy="description"
+            :options="resourceTypeOptions"
+          />
+          <va-input
+            v-model="resourceId"
+            placeholder="請輸入資源 ID"
+          >
+          </va-input>
+          <va-button @click="addTarget">{{ $t('resource.button.addTarget') }}</va-button>
+        </div>
+        <div class="flex xs6">
+          <va-list fit>
+            <va-list-label>
+              已新增目標資源
+            </va-list-label>
 
+            <template>
+              <va-item>
+                <va-item-section>
+                  <va-item-label>
+                    Node
+                  </va-item-label>
+
+                  <va-item-label caption>
+                    id: 111
+                  </va-item-label>
+                </va-item-section>
+
+                <va-item-section side>
+                  <div class="icon-click" @click="deleteResource">
+                    <va-icon name="ion ion-ios-close-circle-outline" color="gray" />
+                  </div>
+                </va-item-section>
+              </va-item>
+
+              <va-list-separator/>
+            </template>
+          </va-list>
+        </div>
+      </div>
     </va-card>
 
     <va-card :title="$t('resource.cardTitle.cpu')">
@@ -67,6 +111,16 @@ import { hex2rgb } from '../../services/color-functions'
 export default {
   data () {
     return {
+      resourceType: '',
+      resourceTypeOptions: [
+        'Node',
+        'Group',
+        'User',
+        'Job',
+        'Jobtype',
+      ],
+      resourceId: '',
+
       count: 0,
       deD: [100, 19, 3, 5, 2, 3, 11, 22],
       chartData: {},
@@ -106,6 +160,12 @@ export default {
     }
   },
   methods: {
+    addTarget () {
+      console.log('addTarget')
+    },
+    deleteResource () {
+      console.log('deleteResource')
+    },
     updateData () {
       let newArray = []
       this.deD.push(this.deD[0])
@@ -158,6 +218,16 @@ export default {
 <style lang="scss" scoped>
 .va-card {
   margin-bottom: 30px;
+}
+
+.icon-click {
+  cursor: pointer;
+
+  &:hover {
+    i {
+      color: black !important;
+    }
+  }
 }
 
 .node-list {

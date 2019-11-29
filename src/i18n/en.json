@@ -6,6 +6,14 @@
       "memory": "記憶體用量 Memory Usage",
       "nodeStatus": "節點資源分配狀態 Node Status",
       "form": "輸入資訊 Form"
+    },
+    "select": {
+      "resourceType": {
+        "title": "選擇資源類別 Resource Type"
+      } 
+    },
+    "button": {
+      "addTarget": "新增資源"
     }
   },
   "systemInfo": {
