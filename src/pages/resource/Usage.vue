@@ -1,15 +1,20 @@
 <template>
   <div>
-    <va-card :title="$t('resourceInfo.cpu')">
+    <!-- 輸入欄位，指定要看哪一些資料 -->
+    <va-card :title="$t('resource.cardTitle.form')">
+
+    </va-card>
+
+    <va-card :title="$t('resource.cardTitle.cpu')">
       <va-chart :data="chartData" :options="testOption" type="line" />
     </va-card>
-    <va-card :title="$t('resourceInfo.gpu')">
+    <va-card :title="$t('resource.cardTitle.gpu')">
       <va-chart :data="chartData" :options="testOption" type="line" />
     </va-card>
-    <va-card :title="$t('resourceInfo.memory')">
+    <va-card :title="$t('resource.cardTitle.memory')">
       <va-chart :data="chartData" :options="testOption" type="line" />
     </va-card>
-    <va-card :title="$t('resourceInfo.nodeStatus')">
+    <va-card :title="$t('resource.cardTitle.nodeStatus')">
       <div class="node-list">
         <div class="node-container">
           <div class="pod-row">

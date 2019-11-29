@@ -1,4 +1,13 @@
 {
+  "resource": {
+    "cardTitle": {
+      "gpu": "圖形處理器 Graphic Process Unit",
+      "cpu": "中央處理器 Central Process Unit",
+      "memory": "記憶體用量 Memory Usage",
+      "nodeStatus": "節點資源分配狀態 Node Status",
+      "form": "輸入資訊 Form"
+    }
+  },
   "systemInfo": {
     "nodeType": "類別 Node Type",
     "nodeCount": "數量 Node Count",
@@ -10,12 +19,6 @@
     "gpuCapacity": "GPU Capacity",
     "gpuCount": "GPU 核心數量",
     "memorySizePerGpu": "記憶體大小 / GPU"
-  },
-  "resourceInfo": {
-    "gpu": "圖形處理器 Graphic Process Unit",
-    "cpu": "中央處理器 Central Process Unit",
-    "memory": "記憶體用量 Memory Usage",
-    "nodeStatus": "節點資源分配狀態 Node Status"
   },
   "groupInfo" :{
     "groupSelect": "請選擇目標群組 Please Select Group",
