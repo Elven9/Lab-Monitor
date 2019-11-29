@@ -59,3 +59,62 @@ exports.getUserInfo = () => {
     ],
   })
 }
+
+exports.getResourceUsage = (payload) => {
+  let mockPayload = []
+
+  // Prepare CPU
+  if (payload.resource.indexOf(0) !== -1) {
+    for (let i = 0; i < payload.identifier.length; i++) {
+      let load = {
+        'resource': 0,
+        'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
+      }
+      load[`data|${payload.limit}`] = [
+        {
+          'usage|0-100': 1,
+          timestamp: '@datetime',
+        },
+      ]
+      mockPayload.push(load)
+    }
+  }
+
+  // Prepare GPU
+  if (payload.resource.indexOf(1) !== -1) {
+    for (let i = 0; i < payload.identifier.length; i++) {
+      let load = {
+        'resource': 1,
+        'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
+      }
+      load[`data|${payload.limit}`] = [
+        {
+          'usage|0-100': 1,
+          timestamp: '@datetime',
+        },
+      ]
+      mockPayload.push(load)
+    }
+  }
+
+  // Prepare Memory
+  if (payload.resource.indexOf(2) !== -1) {
+    for (let i = 0; i < payload.identifier.length; i++) {
+      let load = {
+        'resource': 2,
+        'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
+      }
+      load[`data|${payload.limit}`] = [
+        {
+          'usage|0-100': 1,
+          timestamp: '@datetime',
+        },
+      ]
+      mockPayload.push(load)
+    }
+  }
+
+  return Mock.mock({
+    'data': mockPayload,
+  })
+}

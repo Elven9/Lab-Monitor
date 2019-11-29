@@ -15,6 +15,9 @@
             placeholder="請輸入資源 ID"
           >
           </va-input>
+          <va-button @click="addTarget" :disabled="!isAddable">{{ $t('resource.button.addTarget') }}</va-button>
+        </div>
+        <div class="flex xs6">
           <va-date-picker
             :label="$t('resource.dateTime.start')"
             :config="{enableTime: true}"
@@ -25,16 +28,26 @@
             :config="{enableTime: true}"
             v-model="timeRangeEnd"
           />
-          <va-button @click="addTarget" :disabled="!isAddable">{{ $t('resource.button.addTarget') }}</va-button>
-        </div>
-        <div class="flex xs6">
+          <va-slider
+            label="limit"
+            :invert-label="true"
+            color="info"
+            value-visible
+            v-model="limit"
+            :min="1"
+            :max="20"
+          />
+          <va-checkbox
+            label="DESC"
+            v-model="isDesc"
+          />
           <va-list fit>
             <va-list-label>
               已新增目標資源
             </va-list-label>
 
             <template v-for="(t, idx) in resourceTargets">
-              <va-item :key="t.id">
+              <va-item :key="t.id+idx">
                 <va-item-section>
                   <va-item-label>
                     {{ `${t.type}, id: ${t.id}` }}
@@ -52,23 +65,26 @@
                 </va-item-section>
               </va-item>
 
-              <va-list-separator v-if="idx !== resourceTargets.length - 1" :key="t.id+111"/>
+              <va-list-separator v-if="idx !== resourceTargets.length - 1" :key="t.id+idx+111"/>
             </template>
           </va-list>
-          <va-button @click="submit" :disabled="resourceTargets.length === 0">{{ $t('resource.button.submit') }}</va-button>
+          <va-button @click="submit" :disabled="!isSubmmitable">{{ $t('resource.button.submit') }}</va-button>
         </div>
       </div>
     </va-card>
 
+    <!-- Charts -->
     <va-card :title="$t('resource.cardTitle.cpu')">
-      <va-chart :data="chartData" :options="testOption" type="line" />
+      <va-chart :data="cpuChartData" :options="chartOption" type="line" />
     </va-card>
     <va-card :title="$t('resource.cardTitle.gpu')">
-      <va-chart :data="chartData" :options="testOption" type="line" />
+      <va-chart :data="gpuChartData" :options="chartOption" type="line" />
     </va-card>
     <va-card :title="$t('resource.cardTitle.memory')">
-      <va-chart :data="chartData" :options="testOption" type="line" />
+      <va-chart :data="memChartData" :options="chartOption" type="line" />
     </va-card>
+
+    <!-- Pie -->
     <va-card :title="$t('resource.cardTitle.nodeStatus')">
       <div class="node-list">
         <div class="node-container">
@@ -118,6 +134,7 @@
 
 <script>
 import { hex2rgb } from '../../services/color-functions'
+import { getResourceUsage } from '../../api/resource.js'
 
 export default {
   data () {
@@ -134,10 +151,25 @@ export default {
       resourceTargets: [],
       timeRangeStart: '',
       timeRangeEnd: '',
+      limit: 6,
+      isDesc: false,
 
-      count: 0,
-      deD: [100, 19, 3, 5, 2, 3, 11, 22],
-      chartData: {},
+      // Chart Related
+      colorSequence: ['primary', 'secondary', 'success', 'info', 'danger', 'warning', 'dark'],
+      cpuChartData: {},
+      gpuChartData: {},
+      memChartData: {},
+      chartOption: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              min: 0,
+              max: 100,
+            },
+          }],
+        },
+      },
+
       testDataForPie: {
         datasets: [{
           data: [10, 20, 30],
@@ -162,15 +194,6 @@ export default {
           text: 'POD1',
         },
       },
-      testOption: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-            },
-          }],
-        },
-      },
     }
   },
   methods: {
@@ -182,55 +205,70 @@ export default {
       this.resourceTargets.push({
         'type': this.resourceType,
         'id': this.resourceId,
-        'start': this.timeRangeStart,
-        'end': this.timeRangeEnd,
       })
     },
     deleteResource (resource, id) {
       let idx = this.resourceTargets.findIndex(r => r.type === resource && r.id === id)
       if (idx !== -1) this.resourceTargets.splice(idx, 1)
     },
-    submit () {
-
+    async submit () {
+      // Process Payload
+      let payload = {
+        resource: [0, 1, 2], // Get All Resource, CPU, GPU, Memory
+        identifier: this.resourceTargets,
+        start: this.timeRangeStart,
+        end: this.timeRangeEnd,
+        limit: this.limit,
+        order: this.isDesc ? 'DESC' : 'ASC',
+      }
+      let data = await getResourceUsage(payload)
+      this.updateData(data.data)
     },
-    updateData () {
-      let newArray = []
-      this.deD.push(this.deD[0])
-      let data = this.deD.slice(1)
-      this.deD = data
-      for (let i = this.count; i < this.count + 8; i++) {
-        newArray.push(i)
-      }
-      this.count++
-      let defaultObject = {
-        labels: newArray,
-        datasets: [{
-          label: '# of Votes',
-          data,
-          borderWidth: 1,
-          borderColor: hex2rgb(this.$themes['primary'], 1).css,
-          backgroundColor: hex2rgb(this.$themes['primary'], 0.6).css,
-        },
-        {
-          label: '# of Votes',
-          data: data.map(d => d + 100),
-          borderWidth: 1,
-          borderColor: hex2rgb(this.$themes['secondary'], 1).css,
-          backgroundColor: hex2rgb(this.$themes['secondary'], 0.6).css,
-        }],
+    updateData (data) {
+      console.log(data)
+      let defaultObjects = [{
+        labels: [...Array(this.limit).keys()],
+        datasets: [],
+      },
+      {
+        labels: [...Array(this.limit).keys()],
+        datasets: [],
+      },
+      {
+        labels: [...Array(this.limit).keys()],
+        datasets: [],
+      }]
+      let colorCount = [0, 0, 0]
+
+      // Process Data
+      for (let i = 0; i < data.length; i++) {
+        let dataset = {
+          label: `${data[i].identifier.id}, ${data[i].identifier.type}`,
+          data: data[i].data.map(d => d.usage),
+          borderWidth: 2,
+          borderColor: hex2rgb(this.$themes[this.colorSequence[colorCount[data[i].resource]++]], 1).css,
+          fill: false,
+          lineTension: 0.2,
+        }
+
+        // Push To Char Data
+        defaultObjects[data[i].resource].datasets.push(dataset)
       }
 
-      this.chartData = defaultObject
+      this.cpuChartData = defaultObjects[0]
+      this.gpuChartData = defaultObjects[1]
+      this.memChartData = defaultObjects[2]
     },
   },
   computed: {
     isAddable () {
-      return this.timeRangeEnd.length !== 0 && this.timeRangeStart.length !== 0 && this.resourceType.length !== 0 && this.resourceId.length !== 0
+      return this.resourceType.length !== 0 && this.resourceId.length !== 0
+    },
+    isSubmmitable () {
+      return this.timeRangeEnd.length !== 0 && this.timeRangeStart.length !== 0 && this.resourceTargets.length !== 0
     },
   },
   mounted () {
-    setInterval(this.updateData, 1000)
-
     // Resize Canvas
     let target = document.getElementsByClassName('pod-row')
 
@@ -250,6 +288,15 @@ export default {
 <style lang="scss" scoped>
 .va-card {
   margin-bottom: 30px;
+
+  .va-list {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .va-checkbox {
+    margin-top: 5px;
+  }
 }
 
 .icon-click {
