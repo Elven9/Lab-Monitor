@@ -15,7 +15,17 @@
             placeholder="請輸入資源 ID"
           >
           </va-input>
-          <va-button @click="addTarget">{{ $t('resource.button.addTarget') }}</va-button>
+          <va-date-picker
+            :label="$t('resource.dateTime.start')"
+            :config="{enableTime: true}"
+            v-model="timeRangeStart"
+          />
+          <va-date-picker
+            :label="$t('resource.dateTime.end')"
+            :config="{enableTime: true}"
+            v-model="timeRangeEnd"
+          />
+          <va-button @click="addTarget" :disabled="!isAddable">{{ $t('resource.button.addTarget') }}</va-button>
         </div>
         <div class="flex xs6">
           <va-list fit>
@@ -23,28 +33,29 @@
               已新增目標資源
             </va-list-label>
 
-            <template>
-              <va-item>
+            <template v-for="(t, idx) in resourceTargets">
+              <va-item :key="t.id">
                 <va-item-section>
                   <va-item-label>
-                    Node
+                    {{ `${t.type}, id: ${t.id}` }}
                   </va-item-label>
 
                   <va-item-label caption>
-                    id: 111
+                    {{ `${t.start} ~ ${t.end}` }}
                   </va-item-label>
                 </va-item-section>
 
                 <va-item-section side>
-                  <div class="icon-click" @click="deleteResource">
+                  <div class="icon-click" @click="deleteResource(t.type, t.id)">
                     <va-icon name="ion ion-ios-close-circle-outline" color="gray" />
                   </div>
                 </va-item-section>
               </va-item>
 
-              <va-list-separator/>
+              <va-list-separator v-if="idx !== resourceTargets.length - 1" :key="t.id+111"/>
             </template>
           </va-list>
+          <va-button @click="submit" :disabled="resourceTargets.length === 0">{{ $t('resource.button.submit') }}</va-button>
         </div>
       </div>
     </va-card>
@@ -120,6 +131,9 @@ export default {
         'Jobtype',
       ],
       resourceId: '',
+      resourceTargets: [],
+      timeRangeStart: '',
+      timeRangeEnd: '',
 
       count: 0,
       deD: [100, 19, 3, 5, 2, 3, 11, 22],
@@ -161,10 +175,23 @@ export default {
   },
   methods: {
     addTarget () {
-      console.log('addTarget')
+      // 確認不要重複新增
+      for (let i = 0; i < this.resourceTargets.length; i++) {
+        if (this.resourceTargets[i].type === this.resourceType && this.resourceTargets[i].id === this.resourceId) { return }
+      }
+      this.resourceTargets.push({
+        'type': this.resourceType,
+        'id': this.resourceId,
+        'start': this.timeRangeStart,
+        'end': this.timeRangeEnd,
+      })
     },
-    deleteResource () {
-      console.log('deleteResource')
+    deleteResource (resource, id) {
+      let idx = this.resourceTargets.findIndex(r => r.type === resource && r.id === id)
+      if (idx !== -1) this.resourceTargets.splice(idx, 1)
+    },
+    submit () {
+
     },
     updateData () {
       let newArray = []
@@ -194,6 +221,11 @@ export default {
       }
 
       this.chartData = defaultObject
+    },
+  },
+  computed: {
+    isAddable () {
+      return this.timeRangeEnd.length !== 0 && this.timeRangeStart.length !== 0 && this.resourceType.length !== 0 && this.resourceId.length !== 0
     },
   },
   mounted () {

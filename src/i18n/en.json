@@ -13,7 +13,12 @@
       } 
     },
     "button": {
-      "addTarget": "新增資源"
+      "addTarget": "新增資源",
+      "submit": "送出資料"
+    },
+    "dateTime": {
+      "start": "開始時間",
+      "end": "結束時間"
     }
   },
   "systemInfo": {
