@@ -334,6 +334,7 @@
     "hardware": "硬體設備 Hardware",
     "resource": "資源管理 Resource Management",
     "usage": "資源使用狀況 Resource Usage",
+    "allocation": "資源分配狀況 Resource Allocation",
     "auth": "Auth",
     "rating": "Rating",
     "buttons": "Buttons",

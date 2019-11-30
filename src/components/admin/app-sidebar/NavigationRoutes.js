@@ -30,6 +30,10 @@ export const navigationRoutes = {
           name: 'usage',
           displayName: 'menu.usage',
         },
+        {
+          name: 'allocation',
+          displayName: 'menu.allocation',
+        },
       ],
     },
     {

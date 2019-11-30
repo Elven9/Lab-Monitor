@@ -98,52 +98,6 @@
       />
       <va-chart :data="memChartData" :options="{}" type="line" />
     </va-card>
-
-    <!-- Pie -->
-    <va-card :title="$t('resource.cardTitle.nodeStatus')">
-      <div class="node-list">
-        <div class="node-container">
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-        </div>
-        <div class="node-container">
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-        </div>
-        <div class="node-container">
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-        </div>
-        <div class="node-container">
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-        </div>
-      </div>
-    </va-card>
   </div>
 </template>
 
@@ -178,31 +132,6 @@ export default {
       isCpuAccu: false,
       isGpuAccu: false,
       isMemAccu: false,
-
-      testDataForPie: {
-        datasets: [{
-          data: [10, 20, 30],
-          backgroundColor: [
-            hex2rgb(this.$themes['primary'], 1).css,
-            hex2rgb(this.$themes['secondary'], 1).css,
-            hex2rgb(this.$themes['info'], 1).css,
-          ],
-        }],
-        labels: [
-          'Red',
-          'Yellow',
-          'ddd',
-        ],
-      },
-      testOptionForPie: {
-        legend: {
-          display: false,
-        },
-        title: {
-          display: true,
-          text: 'POD1',
-        },
-      },
     }
   },
   methods: {
@@ -301,20 +230,6 @@ export default {
       return this.timeRangeEnd.length !== 0 && this.timeRangeStart.length !== 0 && this.resourceTargets.length !== 0
     },
   },
-  mounted () {
-    // Resize Canvas
-    let target = document.getElementsByClassName('pod-row')
-
-    for (let j = 0; j < target.length; j++) {
-      let donuts = target[j].getElementsByTagName('canvas')
-      for (let i = 0; i < donuts.length; i++) {
-        donuts[i].width = 50
-        donuts[i].height = 50
-        donuts[i].style.width = `100px`
-        donuts[i].style.height = `100px`
-      }
-    }
-  },
 }
 </script>
 
@@ -343,38 +258,6 @@ export default {
   &:hover {
     i {
       color: black !important;
-    }
-  }
-}
-
-.node-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  .node-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 240px;
-    padding: 8px;
-    margin: 5px;
-
-    border: solid black 1px;
-    border-radius: 20px;
-
-    .pod-row {
-      width: 120px;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-
-      .va-chart {
-        margin: 5px;
-      }
     }
   }
 }

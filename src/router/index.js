@@ -39,6 +39,11 @@ export default new Router({
           path: 'usage',
           component: () => import('../pages/resource/Usage.vue'),
         },
+        {
+          name: 'allocation',
+          path: 'allocation',
+          component: () => import('../pages/resource/Allocation.vue'),
+        },
       ],
     },
     {
