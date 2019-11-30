@@ -131,31 +131,6 @@ export default {
       cpuNodesData: [],
       gpuNodesData: [],
       memNodesData: [],
-
-      testDataForPie: {
-        datasets: [{
-          data: [10, 20, 30],
-          backgroundColor: [
-            hex2rgb(this.$themes['primary'], 1).css,
-            hex2rgb(this.$themes['secondary'], 1).css,
-            hex2rgb(this.$themes['info'], 1).css,
-          ],
-        }],
-        labels: [
-          'Red',
-          'Yellow',
-          'ddd',
-        ],
-      },
-      Options: {
-        legend: {
-          display: false,
-        },
-        title: {
-          display: true,
-          text: 'POD1',
-        },
-      },
     }
   },
   methods: {
