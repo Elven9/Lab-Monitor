@@ -21,6 +21,13 @@
       "end": "結束時間"
     }
   },
+  "resourceAllocation": {
+    "title": {
+      "cpu": "處理器使用分配狀態 CPU Allocation Status",
+      "gpu": "圖形處理器使用分配狀態 GPU Allocation Status",
+      "mem": "記憶體使用分配狀態 Memory Allocation Status"
+    }
+  },
   "systemInfo": {
     "nodeType": "類別 Node Type",
     "nodeCount": "數量 Node Count",

@@ -50,47 +50,58 @@
       </div>
     </va-card>
 
-    <!-- Pie -->
-    <va-card :title="$t('resource.cardTitle.nodeStatus')">
+    <!-- CPU -->
+    <va-card :title="$t('resourceAllocation.title.cpu')">
       <div class="node-list">
-        <div class="node-container">
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-        </div>
-        <div class="node-container">
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+        <div class="node" v-for="(node, idx) in cpuNodesData" :key="node.id">
+          <h1>{{ `Node ${idx}` }}</h1>
+          <div class="node-container">
+            <div class="pod-row">
+              <va-chart :data="node[0].dataPayload" :options="node[0].option" type="donut" />
+              <va-chart :data="node[1].dataPayload" :options="node[1].option" type="donut" />
+            </div>
+            <div class="pod-row">
+              <va-chart :data="node[2].dataPayload" :options="node[2].option" type="donut" />
+              <va-chart :data="node[3].dataPayload" :options="node[3].option" type="donut" />
+            </div>
           </div>
         </div>
-        <div class="node-container">
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+      </div>
+    </va-card>
+
+    <!-- GPU -->
+    <va-card :title="$t('resourceAllocation.title.gpu')">
+      <div class="node-list">
+        <div class="node" v-for="(node, idx) in gpuNodesData" :key="node.id">
+          <h1>{{ `Node ${idx}` }}</h1>
+          <div class="node-container">
+            <div class="pod-row">
+              <va-chart :data="node[0].dataPayload" :options="node[0].option" type="donut" />
+              <va-chart :data="node[1].dataPayload" :options="node[1].option" type="donut" />
+            </div>
+            <div class="pod-row">
+              <va-chart :data="node[2].dataPayload" :options="node[2].option" type="donut" />
+              <va-chart :data="node[3].dataPayload" :options="node[3].option" type="donut" />
+            </div>
           </div>
         </div>
-        <div class="node-container">
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-          </div>
-          <div class="pod-row">
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
-            <va-chart :data="testDataForPie" :options="testOptionForPie" type="donut" />
+      </div>
+    </va-card>
+
+    <!-- mem -->
+    <va-card :title="$t('resourceAllocation.title.mem')">
+      <div class="node-list">
+        <div class="node" v-for="(node, idx) in memNodesData" :key="node.id">
+          <h1>{{ `Node ${idx}` }}</h1>
+          <div class="node-container">
+            <div class="pod-row">
+              <va-chart :data="node[0].dataPayload" :options="node[0].option" type="donut" />
+              <va-chart :data="node[1].dataPayload" :options="node[1].option" type="donut" />
+            </div>
+            <div class="pod-row">
+              <va-chart :data="node[2].dataPayload" :options="node[2].option" type="donut" />
+              <va-chart :data="node[3].dataPayload" :options="node[3].option" type="donut" />
+            </div>
           </div>
         </div>
       </div>
@@ -116,6 +127,11 @@ export default {
       resourceId: '',
       resourceTargets: [],
 
+      // For Pie Chart
+      cpuNodesData: [],
+      gpuNodesData: [],
+      memNodesData: [],
+
       testDataForPie: {
         datasets: [{
           data: [10, 20, 30],
@@ -131,7 +147,7 @@ export default {
           'ddd',
         ],
       },
-      testOptionForPie: {
+      Options: {
         legend: {
           display: false,
         },
@@ -183,6 +199,37 @@ export default {
       return this.resourceTargets.length !== 0
     },
   },
+  created () {
+    // Add Default Pie Data
+    for (let i = 0; i < 4; i++) {
+      let toLoad = []
+      for (let j = 1; j <= 4; j++) {
+        toLoad.push({
+          dataPayload: {
+            datasets: [
+              {
+                data: [100],
+                backgroundColor: [hex2rgb(this.$themes['gray'], 1).css],
+              },
+            ],
+            labels: ['None'],
+          },
+          option: {
+            legend: {
+              display: false,
+            },
+            title: {
+              display: true,
+              text: `POD${j}`,
+            },
+          },
+        })
+      }
+      this.cpuNodesData.push(toLoad.slice())
+      this.gpuNodesData.push(toLoad.slice())
+      this.memNodesData.push(toLoad.slice())
+    }
+  },
   mounted () {
     // Resize Canvas
     let target = document.getElementsByClassName('pod-row')
@@ -222,30 +269,38 @@ export default {
 .node-list {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  overflow-x: scroll;
 
-  .node-container {
+  .node {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    min-width: 240px;
-    padding: 8px;
-    margin: 5px;
 
-    border: solid black 1px;
-    border-radius: 20px;
-
-    .pod-row {
-      width: 120px;
+    .node-container {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      min-width: 240px;
+      padding: 8px;
+      margin: 5px;
 
-      .va-chart {
-        margin: 5px;
+      border: solid black 1px;
+      border-radius: 20px;
+
+      .pod-row {
+        width: 120px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        .va-chart {
+          margin: 5px;
+        }
       }
     }
   }
