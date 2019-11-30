@@ -75,13 +75,28 @@
 
     <!-- Charts -->
     <va-card :title="$t('resource.cardTitle.cpu')">
-      <va-chart :data="cpuChartData" :options="chartOption" type="line" />
+      <va-checkbox
+        label="Accumulate"
+        class="accu-checkbox"
+        v-model="isCpuAccu"
+      />
+      <va-chart :data="cpuChartData" :options="{}" type="line" />
     </va-card>
     <va-card :title="$t('resource.cardTitle.gpu')">
-      <va-chart :data="gpuChartData" :options="chartOption" type="line" />
+      <va-checkbox
+        label="Accumulate"
+        class="accu-checkbox"
+        v-model="isGpuAccu"
+      />
+      <va-chart :data="gpuChartData" :options="{}" type="line" />
     </va-card>
     <va-card :title="$t('resource.cardTitle.memory')">
-      <va-chart :data="memChartData" :options="chartOption" type="line" />
+      <va-checkbox
+        label="Accumulate"
+        class="accu-checkbox"
+        v-model="isMemAccu"
+      />
+      <va-chart :data="memChartData" :options="{}" type="line" />
     </va-card>
 
     <!-- Pie -->
@@ -155,20 +170,14 @@ export default {
       isDesc: false,
 
       // Chart Related
+      charData: null,
       colorSequence: ['primary', 'secondary', 'success', 'info', 'danger', 'warning', 'dark'],
       cpuChartData: {},
       gpuChartData: {},
       memChartData: {},
-      chartOption: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              min: 0,
-              max: 100,
-            },
-          }],
-        },
-      },
+      isCpuAccu: false,
+      isGpuAccu: false,
+      isMemAccu: false,
 
       testDataForPie: {
         datasets: [{
@@ -222,10 +231,11 @@ export default {
         order: this.isDesc ? 'DESC' : 'ASC',
       }
       let data = await getResourceUsage(payload)
-      this.updateData(data.data)
+      this.charData = data.data
+      this.updateData()
     },
-    updateData (data) {
-      console.log(data)
+    updateData () {
+      let data = this.charData
       let defaultObjects = [{
         labels: [...Array(this.limit).keys()],
         datasets: [],
@@ -239,15 +249,27 @@ export default {
         datasets: [],
       }]
       let colorCount = [0, 0, 0]
+      let toShowBackground = []
 
       // Process Data
       for (let i = 0; i < data.length; i++) {
+        // Process Y Data
+        let processData = data[i].data.map(d => d.usage)
+        if ((this.isCpuAccu && data[i].resource === 0) || (this.isGpuAccu && data[i].resource === 1) || (this.isMemAccu && data[i].resource === 2)) {
+          toShowBackground.push(data[i].resource)
+          for (let j = 0; j < defaultObjects[data[i].resource].datasets.length; j++) {
+            for (let k = 0; k < processData.length; k++) {
+              processData[k] += defaultObjects[data[i].resource].datasets[j].data[k]
+            }
+          }
+        }
         let dataset = {
           label: `${data[i].identifier.id}, ${data[i].identifier.type}`,
-          data: data[i].data.map(d => d.usage),
+          data: processData,
           borderWidth: 2,
           borderColor: hex2rgb(this.$themes[this.colorSequence[colorCount[data[i].resource]++]], 1).css,
-          fill: false,
+          backgroundColor: hex2rgb(this.$themes[this.colorSequence[colorCount[data[i].resource]++]], 0.6).css,
+          fill: toShowBackground.indexOf(data[i].resource) !== -1,
           lineTension: 0.2,
         }
 
@@ -258,6 +280,17 @@ export default {
       this.cpuChartData = defaultObjects[0]
       this.gpuChartData = defaultObjects[1]
       this.memChartData = defaultObjects[2]
+    },
+  },
+  watch: {
+    isCpuAccu () {
+      if (this.charData) this.updateData()
+    },
+    isGpuAccu () {
+      if (this.charData) this.updateData()
+    },
+    isMemAccu () {
+      if (this.charData) this.updateData()
     },
   },
   computed: {
@@ -296,6 +329,11 @@ export default {
 
   .va-checkbox {
     margin-top: 5px;
+
+    &.accu-checkbox {
+      margin-top: 0px;
+      margin-bottom: 5px;
+    }
   }
 }
 
