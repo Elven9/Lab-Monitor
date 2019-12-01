@@ -16,6 +16,11 @@ exports.getUserInfo = (userName) => {
   return mockEntry.getUserInfo()
 }
 
+exports.getQueueStatistics = () => {
+  // return api('/queue/statistic')
+  return mockEntry.getQueueStatistics()
+}
+
 exports.getInteractiveQueue = () => {
   // return api('/queue/interactive')
 }

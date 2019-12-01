@@ -2,8 +2,12 @@
   <div class="container">
     <h1 class="section-header">佇列狀態 Queue Status Information</h1>
     <va-card>
+      <div class="aggregator-checkbox">
+        <va-checkbox label="Interactive" v-model="isInteractiveChart"/>
+        <va-checkbox label="Train" v-model="isTrainChart"/>
+        <va-checkbox label="Service" v-model="isServiceChart"/>
+      </div>
       <va-chart :data="queueChartData" :options="{}" type="line" />
-
       <va-data-table
         :fields="queueStatusField"
         :data="queueStatusData"
@@ -100,17 +104,25 @@
 </template>
 
 <script>
-// import { getInteractiveQueue, getTrainQueue, getServiceQueue } from '../api/system'
+import { getQueueStatistics, getInteractiveQueue, getTrainQueue, getServiceQueue } from '../api/system'
 
-// import { hex2rgb } from '../services/color-functions'
+import { hex2rgb } from '../services/color-functions'
 
 export default {
   data () {
     return {
       queueChartData: {
-        labels: [0, 1, 2, 3, 4],
-        datasets: {},
+        labels: [1, 2, 3, 4, 5, 6],
+        datasets: [{}],
       },
+      backupData: '',
+
+      // CheckBox
+      isInteractiveChart: true,
+      isTrainChart: true,
+      isServiceChart: true,
+
+      queueStatusData: [],
       interactiveQueueData: [],
       trainQueueData: [],
       serviceQueueData: [],
@@ -133,7 +145,76 @@ export default {
       }]
     },
   },
+  methods: {
+    async updateQueueStatistic () {
+      let data = await getQueueStatistics()
+
+      let newChartData = {
+        labels: [1, 2, 3, 4, 5, 6],
+        datasets: [],
+      }
+
+      newChartData.datasets.push({
+        label: `Interactive Job Queue`,
+        data: data.data['interactive'],
+        borderWidth: 2,
+        borderColor: hex2rgb(this.$themes['primary'], 1).css,
+        backgroundColor: hex2rgb(this.$themes['primary'], 0.6).css,
+        fill: false,
+        lineTension: 0.2,
+      })
+
+      newChartData.datasets.push({
+        label: `Train Job Queue`,
+        data: data.data['train'],
+        borderWidth: 2,
+        borderColor: hex2rgb(this.$themes['success'], 1).css,
+        backgroundColor: hex2rgb(this.$themes['success'], 0.6).css,
+        fill: false,
+        lineTension: 0.2,
+      })
+
+      newChartData.datasets.push({
+        label: `Service Job Queue`,
+        data: data.data['service'],
+        borderWidth: 2,
+        borderColor: hex2rgb(this.$themes['info'], 1).css,
+        backgroundColor: hex2rgb(this.$themes['info'], 0.6).css,
+        fill: false,
+        lineTension: 0.2,
+      })
+
+      this.backupData = JSON.stringify(newChartData)
+
+      this.queueChartData = newChartData
+      this.queueStatusData = data.data.timeInfo
+    },
+    toggleChart () {
+      let bData = JSON.parse(this.backupData)
+      let interactiveIdx = bData.datasets.findIndex(e => e.label === `Interactive Job Queue`)
+      let trainIdx = bData.datasets.findIndex(e => e.label === `Train Job Queue`)
+      let serviceIdx = bData.datasets.findIndex(e => e.label === `Service Job Queue`)
+
+      if (!this.isInteractiveChart) bData.datasets.splice(interactiveIdx, 1)
+      if (!this.isTrainChart) bData.datasets.splice(trainIdx, 1)
+      if (!this.isServiceChart) bData.datasets.splice(serviceIdx, 1)
+
+      this.queueChartData = bData
+    },
+  },
+  watch: {
+    isInteractiveChart () {
+      this.toggleChart()
+    },
+    isTrainChart () {
+      this.toggleChart()
+    },
+    isServiceChart () {
+      this.toggleChart()
+    },
+  },
   async mounted () {
+    this.updateQueueStatistic()
   },
 }
 </script>
@@ -144,6 +225,14 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
+  .aggregator-checkbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+  }
 
   .section-header {
     margin: 10px 0px 10px 0px;

@@ -1,4 +1,14 @@
 const Mock = require('mockjs')
+Mock.Random.extend({
+  intarray: (limit = 6) => {
+    let result = []
+    for (let i = 0; i < limit; i++) {
+      result.push(Mock.Random.integer(0, 10))
+    }
+
+    return result
+  },
+})
 
 exports.getHardwareSpec = () => {
   // Return Hardware Spec
@@ -187,5 +197,32 @@ exports.getResourceAllocation = (payload) => {
 
   return Mock.mock({
     'data': mockPayload,
+  })
+}
+
+exports.getQueueStatistics = () => {
+  return Mock.mock({
+    'data': {
+      'interactive': '@INTARRAY',
+      'train': '@INTARRAY',
+      'service': '@INTARRAY',
+      'timeInfo': [
+        {
+          'queue_type': 'Interactive',
+          'avg_job_wait_time|0-1000': 1,
+          'avg_queue_len|0-10.1-10': 1,
+        },
+        {
+          'queue_type': 'Train',
+          'avg_job_wait_time|0-1000': 1,
+          'avg_queue_len|0-10.1-10': 1,
+        },
+        {
+          'queue_type': 'Service',
+          'avg_job_wait_time|0-1000': 1,
+          'avg_queue_len|0-10.1-10': 1,
+        },
+      ],
+    },
   })
 }
