@@ -28,6 +28,11 @@ export default new Router({
           path: 'hardware',
           component: () => import('../pages/systemInfo.vue'),
         },
+        {
+          name: 'queue',
+          path: 'queue',
+          component: () => import('../pages/queueStat.vue'),
+        },
       ],
     },
     {

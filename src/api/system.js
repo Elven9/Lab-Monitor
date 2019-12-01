@@ -15,3 +15,15 @@ exports.getUserInfo = (userName) => {
   // return api('/system/userInfo', method="POST", data= { user_name: userName })
   return mockEntry.getUserInfo()
 }
+
+exports.getInteractiveQueue = () => {
+  // return api('/queue/interactive')
+}
+
+exports.getTrainQueue = () => {
+  // return api('/queue/train')
+}
+
+exports.getServiceQueue = () => {
+  // return api('/queue/service')
+}

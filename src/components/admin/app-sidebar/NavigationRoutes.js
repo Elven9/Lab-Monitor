@@ -16,6 +16,10 @@ export const navigationRoutes = {
           name: 'hardware',
           displayName: 'menu.hardware',
         },
+        {
+          name: 'queue',
+          displayName: 'menu.queue',
+        },
       ],
     },
     {
