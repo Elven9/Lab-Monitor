@@ -20,6 +20,10 @@ export const navigationRoutes = {
           name: 'queue',
           displayName: 'menu.queue',
         },
+        {
+          name: 'jobtracker',
+          displayName: 'menu.jobTracker',
+        },
       ],
     },
     {

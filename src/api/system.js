@@ -35,3 +35,8 @@ exports.getServiceQueue = () => {
   // return api('/queue/service')
   return mockEntry.getServiceQueue()
 }
+
+exports.getJobs = () => {
+  // return api('/job/getJobs')
+  return mockEntry.getJobs()
+}

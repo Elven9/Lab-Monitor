@@ -231,12 +231,12 @@ exports.getInteractiveQueue = () => {
   return Mock.mock({
     'data|1-10': [
       {
-        'submissionTime': '@date',
-        'groupId|0-1000': 1,
-        'jobId|0-1000': 1,
-        'userId|0-1000': 1,
-        'jobType|1': ['Interactive', 'Train', 'Service'],
-        'ymalLink': 'https://fake-download-link.com.tw',
+        'submission_time': '@date',
+        'group_id|0-1000': 1,
+        'job_id|0-1000': 1,
+        'user_id|0-1000': 1,
+        'job_type|1': ['Interactive', 'Train', 'Service'],
+        'ymal_link': 'https://fake-download-link.com.tw',
       },
     ],
   })
@@ -246,12 +246,12 @@ exports.getTrainQueue = () => {
   return Mock.mock({
     'data|1-10': [
       {
-        'submissionTime': '@date',
-        'groupId|0-1000': 1,
-        'jobId|0-1000': 1,
-        'userId|0-1000': 1,
-        'jobType|1': ['Interactive', 'Train', 'Service'],
-        'ymalLink': 'https://fake-download-link.com.tw',
+        'submission_time': '@date',
+        'group_id|0-1000': 1,
+        'job_id|0-1000': 1,
+        'user_id|0-1000': 1,
+        'job_type|1': ['Interactive', 'Train', 'Service'],
+        'ymal_link': 'https://fake-download-link.com.tw',
       },
     ],
   })
@@ -261,12 +261,32 @@ exports.getServiceQueue = () => {
   return Mock.mock({
     'data|1-10': [
       {
-        'submissionTime': '@date',
-        'groupId|0-1000': 1,
-        'jobId|0-1000': 1,
-        'userId|0-1000': 1,
-        'jobType|1': ['Interactive', 'Train', 'Service'],
-        'ymalLink': 'https://fake-download-link.com.tw',
+        'submission_time': '@date',
+        'group_id|0-1000': 1,
+        'job_id|0-1000': 1,
+        'user_id|0-1000': 1,
+        'job_type|1': ['Interactive', 'Train', 'Service'],
+        'ymal_link': 'https://fake-download-link.com.tw',
+      },
+    ],
+  })
+}
+
+exports.getJobs = () => {
+  return Mock.mock({
+    'data|1-20': [
+      {
+        'submission_time': '@date',
+        'group_id|0-1000': 1,
+        'job_id|0-1000': 1,
+        'user_id|0-1000': 1,
+        'job_type|1': ['Interactive', 'Train', 'Service'],
+        'ymal_link': 'https://fake-download-link.com.tw',
+        'start_time': '@date',
+        'end_time': '@date',
+        'exe_time|1-10': 1,
+        'wait_time|1-10': 1,
+        'state|1': [0, 1, 2, 3],
       },
     ],
   })

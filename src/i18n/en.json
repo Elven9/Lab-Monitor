@@ -79,6 +79,21 @@
       "gpuMemoryUsage": "GPU 記憶體用量狀況"
     }
   },
+  "jobTracker": {
+    "field": {
+      "jobId": "工作 ID",
+      "groupId": "群組 ID",
+      "userId": "使用者 ID",
+      "jobType": "工作類別",
+      "submissionTime": "提交時間",
+      "startTime": "開始執行時間",
+      "endTime": "結束執行時間",
+      "exeTime": "執行時間",
+      "waitTime": "等待時間",
+      "state": "目前狀態",
+      "yamlDownload": "YAML 檔下載"
+    }
+  },
   "auth": {
     "agree": "I agree to",
     "createAccount": "Create account",
@@ -361,6 +376,7 @@
     "resource": "資源管理 Resource Management",
     "usage": "資源使用狀況 Resource Usage",
     "allocation": "資源分配狀況 Resource Allocation",
+    "jobTracker": "工作追蹤 Job Tracker",
     "auth": "Auth",
     "rating": "Rating",
     "buttons": "Buttons",

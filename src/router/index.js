@@ -33,6 +33,11 @@ export default new Router({
           path: 'queue',
           component: () => import('../pages/queueStat.vue'),
         },
+        {
+          name: 'jobtracker',
+          path: 'jobtracker',
+          component: () => import('../pages/jobTracker.vue'),
+        },
       ],
     },
     {

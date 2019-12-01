@@ -32,13 +32,13 @@
 
         <tbody>
           <tr v-for="q in interactiveQueueData" :key="q.id">
-            <td>{{ q.submissionTime }}</td>
-            <td>{{ q.groupId }}</td>
-            <td>{{ q.userId }}</td>
-            <td>{{ q.jobId }}</td>
-            <td>{{ q.jobType }}</td>
+            <td>{{ q.submission_time }}</td>
+            <td>{{ q.group_id }}</td>
+            <td>{{ q.user_id }}</td>
+            <td>{{ q.job_id }}</td>
+            <td>{{ q.job_type }}</td>
             <td>
-              <a class="download-link" :href="q.ymalLink">Download</a>
+              <a class="download-link" :href="q.ymal_link">Download</a>
             </td>
           </tr>
         </tbody>
@@ -60,11 +60,11 @@
 
         <tbody>
           <tr v-for="q in trainQueueData" :key="q.id">
-            <td>{{ q.submissionTime }}</td>
-            <td>{{ q.groupId }}</td>
-            <td>{{ q.userId }}</td>
-            <td>{{ q.jobId }}</td>
-            <td>{{ q.jobType }}</td>
+            <td>{{ q.submission_time }}</td>
+            <td>{{ q.group_id }}</td>
+            <td>{{ q.user_id }}</td>
+            <td>{{ q.job_id }}</td>
+            <td>{{ q.job_type }}</td>
             <td>
               <a class="download-link" :href="q.ymalLink">Download</a>
             </td>
@@ -88,13 +88,13 @@
 
         <tbody>
           <tr v-for="q in serviceQueueData" :key="q.id">
-            <td>{{ q.submissionTime }}</td>
-            <td>{{ q.groupId }}</td>
-            <td>{{ q.userId }}</td>
-            <td>{{ q.jobId }}</td>
-            <td>{{ q.jobType }}</td>
+            <td>{{ q.submission_time }}</td>
+            <td>{{ q.group_id }}</td>
+            <td>{{ q.user_id }}</td>
+            <td>{{ q.job_id }}</td>
+            <td>{{ q.job_type }}</td>
             <td>
-              <a class="download-link" :href="q.ymalLink">Download</a>
+              <a class="download-link" :href="q.ymal_link">Download</a>
             </td>
           </tr>
         </tbody>
