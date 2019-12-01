@@ -226,3 +226,48 @@ exports.getQueueStatistics = () => {
     },
   })
 }
+
+exports.getInteractiveQueue = () => {
+  return Mock.mock({
+    'data|1-10': [
+      {
+        'submissionTime': '@date',
+        'groupId|0-1000': 1,
+        'jobId|0-1000': 1,
+        'userId|0-1000': 1,
+        'jobType|1': ['Interactive', 'Train', 'Service'],
+        'ymalLink': 'https://fake-download-link.com.tw',
+      },
+    ],
+  })
+}
+
+exports.getTrainQueue = () => {
+  return Mock.mock({
+    'data|1-10': [
+      {
+        'submissionTime': '@date',
+        'groupId|0-1000': 1,
+        'jobId|0-1000': 1,
+        'userId|0-1000': 1,
+        'jobType|1': ['Interactive', 'Train', 'Service'],
+        'ymalLink': 'https://fake-download-link.com.tw',
+      },
+    ],
+  })
+}
+
+exports.getServiceQueue = () => {
+  return Mock.mock({
+    'data|1-10': [
+      {
+        'submissionTime': '@date',
+        'groupId|0-1000': 1,
+        'jobId|0-1000': 1,
+        'userId|0-1000': 1,
+        'jobType|1': ['Interactive', 'Train', 'Service'],
+        'ymalLink': 'https://fake-download-link.com.tw',
+      },
+    ],
+  })
+}

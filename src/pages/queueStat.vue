@@ -38,7 +38,7 @@
             <td>{{ q.jobId }}</td>
             <td>{{ q.jobType }}</td>
             <td>
-              YamlDonwloadLink
+              <a class="download-link" :href="q.ymalLink">Download</a>
             </td>
           </tr>
         </tbody>
@@ -66,7 +66,7 @@
             <td>{{ q.jobId }}</td>
             <td>{{ q.jobType }}</td>
             <td>
-              YamlDonwloadLink
+              <a class="download-link" :href="q.ymalLink">Download</a>
             </td>
           </tr>
         </tbody>
@@ -94,7 +94,7 @@
             <td>{{ q.jobId }}</td>
             <td>{{ q.jobType }}</td>
             <td>
-              YamlDonwloadLink
+              <a class="download-link" :href="q.ymalLink">Download</a>
             </td>
           </tr>
         </tbody>
@@ -215,6 +215,15 @@ export default {
   },
   async mounted () {
     this.updateQueueStatistic()
+
+    // Queue Data
+    let interactiveData = await getInteractiveQueue()
+    let trainData = await getTrainQueue()
+    let serviceData = await getServiceQueue()
+
+    this.interactiveQueueData = interactiveData.data
+    this.trainQueueData = trainData.data
+    this.serviceQueueData = serviceData.data
   },
 }
 </script>
@@ -232,6 +241,10 @@ export default {
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 10px;
+  }
+
+  .download-link {
+    color: rgba(25,162,245,1);
   }
 
   .section-header {

@@ -55,7 +55,7 @@
       "userId": "使用者 ID",
       "jobId": "工作 ID",
       "jobType": "工作種類",
-      "yamlFile": "檔按下載"
+      "yamlFile": "YAML 檔下載"
     }
   },
   "groupInfo" :{

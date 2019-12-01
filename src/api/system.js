@@ -23,12 +23,15 @@ exports.getQueueStatistics = () => {
 
 exports.getInteractiveQueue = () => {
   // return api('/queue/interactive')
+  return mockEntry.getInteractiveQueue()
 }
 
 exports.getTrainQueue = () => {
   // return api('/queue/train')
+  return mockEntry.getTrainQueue()
 }
 
 exports.getServiceQueue = () => {
   // return api('/queue/service')
+  return mockEntry.getServiceQueue()
 }
