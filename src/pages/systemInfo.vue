@@ -1,25 +1,38 @@
 <template>
   <div class="container">
     <h1 class="section-header">目前系統狀態 System Infomation</h1>
-    <va-card>
-      <va-data-table
-        :fields="hardwareSpecField1"
-        :data="hardwareSpec"
-        :per-page="10"
-        no-pagination
-      />
-      <va-data-table
-        :fields="hardwareSpecField2"
-        :data="hardwareSpec"
-        :per-page="10"
-        no-pagination
-      />
-      <va-data-table
-        :fields="hardwareSpecField3"
-        :data="hardwareSpec"
-        :per-page="10"
-        no-pagination
-      />
+    <va-card class="system-info-card">
+      <table class="va-table systemInfo">
+        <thead>
+          <tr>
+            <th>{{ $t('systemInfo.nodeType') }}</th>
+            <th>{{ $t('systemInfo.nodeCount') }}</th>
+            <th>{{ $t('systemInfo.cpuType') }}</th>
+            <th>{{ $t('systemInfo.cpuCapacity') }}</th>
+            <th>{{ $t('systemInfo.cpuCount') }}</th>
+            <th>{{ $t('systemInfo.memorySize') }}</th>
+            <th>{{ $t('systemInfo.gpuType') }}</th>
+            <th>{{ $t('systemInfo.gpuCapacity') }}</th>
+            <th>{{ $t('systemInfo.gpuCount') }}</th>
+            <th>{{ $t('systemInfo.memorySizePerGpu') }}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="h in hardwareSpec" :key="h.id">
+            <td>{{ h.node_type }}</td>
+            <td>{{ h.node_count }}</td>
+            <td>{{ h.cpu_type }}</td>
+            <td>{{ h.cpu_capacity }}</td>
+            <td>{{ h.cpu_count }}</td>
+            <td>{{ h.memory_size }}</td>
+            <td>{{ h.gpu_type }}</td>
+            <td>{{ h.gpu_capacity }}</td>
+            <td>{{ h.gpu_count }}</td>
+            <td>{{ h.gpu_memory_size }}</td>
+          </tr>
+        </tbody>
+      </table>
     </va-card>
     <h1 class="section-header">工作組別狀態 Group Infomation</h1>
     <va-card>
@@ -130,57 +143,6 @@ export default {
       userSelectOption: [],
     }
   },
-  computed: {
-    hardwareSpecField1 () {
-      return [{
-        name: 'node_type',
-        title: this.$t('systemInfo.nodeType'),
-        width: '30%',
-      }, {
-        name: 'node_count',
-        title: this.$t('systemInfo.nodeCount'),
-        width: '20%',
-      }, {
-        name: 'cpu_type',
-        title: this.$t('systemInfo.cpuType'),
-        width: '50%',
-      }]
-    },
-    hardwareSpecField2 () {
-      return [{
-        name: 'cpu_capacity',
-        title: this.$t('systemInfo.cpuCapacity'),
-        width: '30%',
-      }, {
-        name: 'cpu_count',
-        title: this.$t('systemInfo.cpuCount'),
-        width: '20%',
-      }, {
-        name: 'memory_size',
-        title: this.$t('systemInfo.memorySize'),
-        width: '50%',
-      }]
-    },
-    hardwareSpecField3 () {
-      return [ {
-        name: 'gpu_type',
-        title: this.$t('systemInfo.gpuType'),
-        width: '25%',
-      }, {
-        name: 'gpu_capacity',
-        title: this.$t('systemInfo.gpuCapacity'),
-        width: '25%',
-      }, {
-        name: 'gpu_count',
-        title: this.$t('systemInfo.gpuCount'),
-        width: '25%',
-      }, {
-        name: 'gpu_memory_size',
-        title: this.$t('systemInfo.memorySizePerGpu'),
-        width: '25%',
-      }]
-    },
-  },
   methods: {
     returnColorCss (value) {
       let targetTheme = ''
@@ -243,6 +205,22 @@ export default {
   .va-table {
     width: 100%;
     margin-top: 20px;
+  }
+  .system-info-card {
+    width: 100%;
+    overflow-x: scroll;
+
+    .va-card__body {
+      width: fit-content;
+      overflow: visible;
+    }
+
+    .systemInfo {
+      min-width: 1400px;
+      td {
+        width: 10%;
+      }
+    }
   }
 
   .groupInfo {

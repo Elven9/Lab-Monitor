@@ -29,11 +29,11 @@
             v-model="timeRangeEnd"
           />
           <va-slider
-            label="limit"
+            label="resolution"
             :invert-label="true"
             color="info"
             value-visible
-            v-model="limit"
+            v-model="resolution"
             :min="1"
             :max="20"
           />
@@ -120,7 +120,7 @@ export default {
       resourceTargets: [],
       timeRangeStart: '',
       timeRangeEnd: '',
-      limit: 6,
+      resolution: 6,
       isDesc: false,
 
       // Chart Related
@@ -156,7 +156,7 @@ export default {
         identifier: this.resourceTargets,
         start: this.timeRangeStart,
         end: this.timeRangeEnd,
-        limit: this.limit,
+        resolution: this.resolution,
         order: this.isDesc ? 'DESC' : 'ASC',
       }
       let data = await getResourceUsage(payload)
@@ -166,15 +166,15 @@ export default {
     updateData () {
       let data = this.charData
       let defaultObjects = [{
-        labels: [...Array(this.limit).keys()],
+        labels: [...Array(this.resolution).keys()],
         datasets: [],
       },
       {
-        labels: [...Array(this.limit).keys()],
+        labels: [...Array(this.resolution).keys()],
         datasets: [],
       },
       {
-        labels: [...Array(this.limit).keys()],
+        labels: [...Array(this.resolution).keys()],
         datasets: [],
       }]
       let colorCount = [0, 0, 0]

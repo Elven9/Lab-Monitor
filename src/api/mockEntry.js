@@ -80,7 +80,7 @@ exports.getResourceUsage = (payload) => {
         'resource': 0,
         'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
       }
-      load[`data|${payload.limit}`] = [
+      load[`data|${payload.resolution}`] = [
         {
           'usage|0-100': 1,
           timestamp: '@datetime',
@@ -97,7 +97,7 @@ exports.getResourceUsage = (payload) => {
         'resource': 1,
         'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
       }
-      load[`data|${payload.limit}`] = [
+      load[`data|${payload.resolution}`] = [
         {
           'usage|0-100': 1,
           timestamp: '@datetime',
@@ -114,7 +114,7 @@ exports.getResourceUsage = (payload) => {
         'resource': 2,
         'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
       }
-      load[`data|${payload.limit}`] = [
+      load[`data|${payload.resolution}`] = [
         {
           'usage|0-100': 1,
           timestamp: '@datetime',
