@@ -206,7 +206,7 @@ exports.getQueueStatistics = () => {
       'interactive': '@INTARRAY',
       'train': '@INTARRAY',
       'service': '@INTARRAY',
-      'timeInfo': [
+      'time_info': [
         {
           'queue_type': 'Interactive',
           'avg_job_wait_time|0-1000': 1,
@@ -236,7 +236,7 @@ exports.getInteractiveQueue = () => {
         'job_id|0-1000': 1,
         'user_id|0-1000': 1,
         'job_type|1': ['Interactive', 'Train', 'Service'],
-        'ymal_link': 'https://fake-download-link.com.tw',
+        'yaml_link': 'https://fake-download-link.com.tw',
       },
     ],
   })
@@ -251,7 +251,7 @@ exports.getTrainQueue = () => {
         'job_id|0-1000': 1,
         'user_id|0-1000': 1,
         'job_type|1': ['Interactive', 'Train', 'Service'],
-        'ymal_link': 'https://fake-download-link.com.tw',
+        'yaml_link': 'https://fake-download-link.com.tw',
       },
     ],
   })
@@ -266,7 +266,7 @@ exports.getServiceQueue = () => {
         'job_id|0-1000': 1,
         'user_id|0-1000': 1,
         'job_type|1': ['Interactive', 'Train', 'Service'],
-        'ymal_link': 'https://fake-download-link.com.tw',
+        'yaml_link': 'https://fake-download-link.com.tw',
       },
     ],
   })
@@ -281,7 +281,7 @@ exports.getJobs = () => {
         'job_id|0-1000': 1,
         'user_id|0-1000': 1,
         'job_type|1': ['Interactive', 'Train', 'Service'],
-        'ymal_link': 'https://fake-download-link.com.tw',
+        'yaml_link': 'https://fake-download-link.com.tw',
         'start_time': '@date',
         'end_time': '@date',
         'exe_time|1-10': 1,

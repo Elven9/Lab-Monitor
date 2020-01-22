@@ -38,7 +38,7 @@
               <va-badge v-if="j.state == 3" color="warning">Waiting</va-badge>
             </td>
             <td>
-              <a class="download-link" :href="j.ymal_link">Download</a>
+              <a class="download-link" :href="j.yaml_link">Download</a>
             </td>
           </tr>
         </tbody>

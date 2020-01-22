@@ -38,7 +38,7 @@
             <td>{{ q.job_id }}</td>
             <td>{{ q.job_type }}</td>
             <td>
-              <a class="download-link" :href="q.ymal_link">Download</a>
+              <a class="download-link" :href="q.yaml_link">Download</a>
             </td>
           </tr>
         </tbody>
@@ -66,7 +66,7 @@
             <td>{{ q.job_id }}</td>
             <td>{{ q.job_type }}</td>
             <td>
-              <a class="download-link" :href="q.ymalLink">Download</a>
+              <a class="download-link" :href="q.yamlLink">Download</a>
             </td>
           </tr>
         </tbody>
@@ -94,7 +94,7 @@
             <td>{{ q.job_id }}</td>
             <td>{{ q.job_type }}</td>
             <td>
-              <a class="download-link" :href="q.ymal_link">Download</a>
+              <a class="download-link" :href="q.yaml_link">Download</a>
             </td>
           </tr>
         </tbody>
@@ -187,7 +187,7 @@ export default {
       this.backupData = JSON.stringify(newChartData)
 
       this.queueChartData = newChartData
-      this.queueStatusData = data.data.timeInfo
+      this.queueStatusData = data.data['time_info']
     },
     toggleChart () {
       let bData = JSON.parse(this.backupData)
