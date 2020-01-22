@@ -1,10 +1,10 @@
 <template>
   <va-navbar class="app-navbar">
     <header-selector slot="selector" :minimized.sync="minimizedProxy"/>
-    <template slot="logo">
+    <!-- <template slot="logo">
       <va-icon-vuestic/>
-    </template>
-    <template slot="center">
+    </template> -->
+    <!-- <template slot="center">
       <div class="row flex-nowrap align--center justify--space-between">
         <span class="va-navbar__text no-wrap">
           {{$t('navbar.messageUs')}}&nbsp;
@@ -29,45 +29,44 @@
           </va-button>
         </div>
       </div>
-    </template>
-    <div class="app-navbar__actions row flex-nowrap align--center">
+    </template> -->
+    <!-- <div class="app-navbar__actions row flex-nowrap align--center">
       <color-dropdown class="va-navbar__item"/>
       <message-dropdown class="va-navbar__item"/>
       <notification-dropdown class="va-navbar__item"/>
-      <!--<settings-dropdown-->
-        <!--class="va-navbar__item"-->
-        <!--:navbar-view.sync="navbarViewProxy"-->
-      <!--/>-->
+      <settings-dropdown
+        class="va-navbar__item"
+        navbar-view.sync="navbarViewProxy"
+      />
       <language-dropdown class="va-navbar__item"/>
       <profile-dropdown class="va-navbar__item">
         <span>{{userName}}</span>
       </profile-dropdown>
-    </div>
+    </div> -->
   </va-navbar>
 </template>
 
 <script>
-import VaIconVuestic
-  from 'vuestic-ui/src/components/vuestic-components/va-icon/va-iconset/VaIconVuestic'
+// import VaIconVuestic from 'vuestic-ui/src/components/vuestic-components/va-icon/va-iconset/VaIconVuestic'
 import HeaderSelector from './components/HeaderSelector'
-import LanguageDropdown from './components/dropdowns/LanguageDropdown'
-import ProfileDropdown from './components/dropdowns/ProfileDropdown'
-import NotificationDropdown from './components/dropdowns/NotificationDropdown'
-import MessageDropdown from './components/dropdowns/MessageDropdown'
-import SettingsDropdown from './components/dropdowns/SettingsDropdown'
-import ColorDropdown from './components/dropdowns/ColorDropdown'
+// import LanguageDropdown from './components/dropdowns/LanguageDropdown'
+// import ProfileDropdown from './components/dropdowns/ProfileDropdown'
+// import NotificationDropdown from './components/dropdowns/NotificationDropdown'
+// import MessageDropdown from './components/dropdowns/MessageDropdown'
+// import SettingsDropdown from './components/dropdowns/SettingsDropdown'
+// import ColorDropdown from './components/dropdowns/ColorDropdown'
 
 export default {
   name: 'app-navbar',
   components: {
-    SettingsDropdown,
-    ColorDropdown,
-    VaIconVuestic,
+    // SettingsDropdown,
+    // ColorDropdown,
+    // VaIconVuestic,
     HeaderSelector,
-    MessageDropdown,
-    NotificationDropdown,
-    LanguageDropdown,
-    ProfileDropdown,
+    // MessageDropdown,
+    // NotificationDropdown,
+    // LanguageDropdown,
+    // ProfileDropdown,
   },
   props: {
     minimized: {
