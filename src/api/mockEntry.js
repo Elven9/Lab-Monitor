@@ -143,7 +143,7 @@ exports.getResourceAllocation = (payload) => {
             'jobId|0-10000': 1,
             'usage|0-100': 1,
             'location': {
-              'nodeId|0-3': 1,
+              'nodeId|0': 1,
               'podId|0-3': 1,
             },
           },
@@ -164,7 +164,7 @@ exports.getResourceAllocation = (payload) => {
             'jobId|0-10000': 1,
             'usage|0-100': 1,
             'location': {
-              'nodeId|0-3': 1,
+              'nodeId|0': 1,
               'podId|0-3': 1,
             },
           },
@@ -185,7 +185,7 @@ exports.getResourceAllocation = (payload) => {
             'jobId|0-10000': 1,
             'usage|0-100': 1,
             'location': {
-              'nodeId|0-3': 1,
+              'nodeId|0': 1,
               'podId|0-3': 1,
             },
           },

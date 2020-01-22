@@ -56,14 +56,7 @@
         <div class="node" v-for="(node, idx) in nodesData[0]" :key="node.id">
           <h1>{{ `Node ${idx}` }}</h1>
           <div class="node-container">
-            <div class="pod-row">
-              <va-chart :data="node[0].dataPayload" :options="node[0].option" type="donut" />
-              <va-chart :data="node[1].dataPayload" :options="node[1].option" type="donut" />
-            </div>
-            <div class="pod-row">
-              <va-chart :data="node[2].dataPayload" :options="node[2].option" type="donut" />
-              <va-chart :data="node[3].dataPayload" :options="node[3].option" type="donut" />
-            </div>
+            <va-chart :data="node.dataPayload" :options="node.option" type="donut" />
           </div>
         </div>
       </div>
@@ -75,14 +68,7 @@
         <div class="node" v-for="(node, idx) in nodesData[1]" :key="node.id">
           <h1>{{ `Node ${idx}` }}</h1>
           <div class="node-container">
-            <div class="pod-row">
-              <va-chart :data="node[0].dataPayload" :options="node[0].option" type="donut" />
-              <va-chart :data="node[1].dataPayload" :options="node[1].option" type="donut" />
-            </div>
-            <div class="pod-row">
-              <va-chart :data="node[2].dataPayload" :options="node[2].option" type="donut" />
-              <va-chart :data="node[3].dataPayload" :options="node[3].option" type="donut" />
-            </div>
+            <va-chart :data="node.dataPayload" :options="node.option" type="donut" />
           </div>
         </div>
       </div>
@@ -94,14 +80,7 @@
         <div class="node" v-for="(node, idx) in nodesData[2]" :key="node.id">
           <h1>{{ `Node ${idx}` }}</h1>
           <div class="node-container">
-            <div class="pod-row">
-              <va-chart :data="node[0].dataPayload" :options="node[0].option" type="donut" />
-              <va-chart :data="node[1].dataPayload" :options="node[1].option" type="donut" />
-            </div>
-            <div class="pod-row">
-              <va-chart :data="node[2].dataPayload" :options="node[2].option" type="donut" />
-              <va-chart :data="node[3].dataPayload" :options="node[3].option" type="donut" />
-            </div>
+            <va-chart :data="node.dataPayload" :options="node.option" type="donut" />
           </div>
         </div>
       </div>
@@ -119,8 +98,8 @@ export default {
       resourceType: '',
       resourceTypeOptions: [
         'Node',
-        'Group',
-        'User',
+        // 'Group',
+        // 'User',
         'Job',
         'Jobtype',
       ],
@@ -131,6 +110,22 @@ export default {
       isShowingData: true,
       nodesData: [[], [], []],
       colorSequence: ['primary', 'secondary', 'success', 'info', 'danger', 'warning', 'dark'],
+      defaultChartTemplate: {
+        dataPayload: {
+          datasets: [
+            {
+              data: [1],
+              backgroundColor: [hex2rgb(this.$themes['gray'], 1).css],
+            },
+          ],
+          labels: ['None'],
+        },
+        option: {
+          legend: { display: false },
+          title: { display: false },
+        },
+      },
+      nodeCount: 1,
     }
   },
   methods: {
@@ -163,53 +158,27 @@ export default {
       let newData = [[], [], []]
 
       // Add Default Pie Data
-      for (let i = 0; i < 4; i++) {
-        let toLoad = []
-        for (let j = 0; j <= 3; j++) {
-          toLoad.push({
-            dataPayload: {
-              datasets: [
-                {
-                  data: [1],
-                  backgroundColor: [hex2rgb(this.$themes['gray'], 1).css],
-                },
-              ],
-              labels: ['None'],
-            },
-            option: {
-              legend: {
-                display: false,
-              },
-              title: {
-                display: true,
-                text: `POD${j}`,
-              },
-            },
-          })
-        }
-
+      for (let i = 0; i < this.nodeCount; i++) {
         // Deep Clone You Mother Fucker.
-        newData[0].push(JSON.parse(JSON.stringify(toLoad.map(o => Object.assign({}, o)))))
-        newData[1].push(JSON.parse(JSON.stringify(toLoad.map(o => Object.assign({}, o)))))
-        newData[2].push(JSON.parse(JSON.stringify(toLoad.map(o => Object.assign({}, o)))))
+        newData[0].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
+        newData[1].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
+        newData[2].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
       }
-
-      console.log(newData)
 
       // Process Data
       for (let i = 0; i < data.length; i++) {
-        let labelName = `Type: ${data[i].identifier.type}, ID: ${data[i].identifier.id}`
-
         for (let j = 0; j < data[i].data.length; j++) {
-          if (newData[data[i].resource][data[i].data[j].location.nodeId][data[i].data[j].location.podId].dataPayload.labels[0] === 'None') {
-            newData[data[i].resource][data[i].data[j].location.nodeId][data[i].data[j].location.podId].dataPayload.datasets[0].data = []
-            newData[data[i].resource][data[i].data[j].location.nodeId][data[i].data[j].location.podId].dataPayload.datasets[0].backgroundColor = []
-            newData[data[i].resource][data[i].data[j].location.nodeId][data[i].data[j].location.podId].dataPayload.labels = []
+          let labelName = `Pod ID: ${data[i].data[j].location.podId}`
+
+          if (newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.labels[0] === 'None') {
+            newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.datasets[0].data = []
+            newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.datasets[0].backgroundColor = []
+            newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.labels = []
           }
 
-          newData[data[i].resource][data[i].data[j].location.nodeId][data[i].data[j].location.podId].dataPayload.datasets[0].data.push(data[i].data[j].usage)
-          newData[data[i].resource][data[i].data[j].location.nodeId][data[i].data[j].location.podId].dataPayload.datasets[0].backgroundColor.push(hex2rgb(this.$themes[this.colorSequence[newData[data[i].resource][data[i].data[j].location.nodeId][data[i].data[j].location.podId].dataPayload.datasets[0].data.length - 1]], 1).css)
-          newData[data[i].resource][data[i].data[j].location.nodeId][data[i].data[j].location.podId].dataPayload.labels.push(labelName)
+          newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.datasets[0].data.push(data[i].data[j].usage)
+          newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.datasets[0].backgroundColor.push(hex2rgb(this.$themes[this.colorSequence[newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.datasets[0].data.length - 1]], 1).css)
+          newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.labels.push(labelName)
         }
       }
 
@@ -224,13 +193,13 @@ export default {
       }, 500)
     },
     setChartSize () {
-      let target = document.getElementsByClassName('pod-row')
+      let target = document.getElementsByClassName('node-container')
 
       for (let j = 0; j < target.length; j++) {
         let donuts = target[j].getElementsByTagName('canvas')
         for (let i = 0; i < donuts.length; i++) {
-          donuts[i].width = 50
-          donuts[i].height = 50
+          donuts[i].width = 40
+          donuts[i].height = 40
           donuts[i].style.width = `200px`
           donuts[i].style.height = `200px`
         }
@@ -247,33 +216,10 @@ export default {
   },
   created () {
     // Add Default Pie Data
-    for (let i = 0; i < 4; i++) {
-      let toLoad = []
-      for (let j = 0; j <= 3; j++) {
-        toLoad.push({
-          dataPayload: {
-            datasets: [
-              {
-                data: [1],
-                backgroundColor: [hex2rgb(this.$themes['gray'], 1).css],
-              },
-            ],
-            labels: ['Data Not Fetched'],
-          },
-          option: {
-            legend: {
-              display: false,
-            },
-            title: {
-              display: true,
-              text: `POD${j}`,
-            },
-          },
-        })
-      }
-      this.nodesData[0].push(toLoad.slice())
-      this.nodesData[1].push(toLoad.slice())
-      this.nodesData[2].push(toLoad.slice())
+    for (let i = 0; i < this.nodeCount; i++) {
+      this.nodesData[0].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
+      this.nodesData[1].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
+      this.nodesData[2].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
     }
   },
   mounted () {
@@ -320,24 +266,13 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-width: 440px;
+      max-width: 200px;
+      min-height: 220px;
       padding: 8px;
       margin: 5px;
 
       border: solid black 1px;
       border-radius: 20px;
-
-      .pod-row {
-        width: 420px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        .va-chart {
-          margin: 5px;
-        }
-      }
     }
   }
 }
