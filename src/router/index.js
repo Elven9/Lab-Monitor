@@ -50,7 +50,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: { name: 'dashboard' },
+      redirect: { name: 'hardware' },
     },
     {
       path: '/404',
