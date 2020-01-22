@@ -22,8 +22,8 @@
         <thead>
           <tr>
             <th>{{ $t('queueStatus.job.submissionTime') }}</th>
-            <th>{{ $t('queueStatus.job.groupId') }}</th>
-            <th>{{ $t('queueStatus.job.userId') }}</th>
+            <!-- <th>{{ $t('queueStatus.job.groupId') }}</th>
+            <th>{{ $t('queueStatus.job.userId') }}</th> -->
             <th>{{ $t('queueStatus.job.jobId') }}</th>
             <th>{{ $t('queueStatus.job.jobType') }}</th>
             <th>{{ $t('queueStatus.job.yamlFile') }}</th>
@@ -33,8 +33,8 @@
         <tbody>
           <tr v-for="q in interactiveQueueData" :key="q.id">
             <td>{{ q.submission_time }}</td>
-            <td>{{ q.group_id }}</td>
-            <td>{{ q.user_id }}</td>
+            <!-- <td>{{ q.group_id }}</td>
+            <td>{{ q.user_id }}</td> -->
             <td>{{ q.job_id }}</td>
             <td>{{ q.job_type }}</td>
             <td>
@@ -50,8 +50,8 @@
         <thead>
           <tr>
             <th>{{ $t('queueStatus.job.submissionTime') }}</th>
-            <th>{{ $t('queueStatus.job.groupId') }}</th>
-            <th>{{ $t('queueStatus.job.userId') }}</th>
+            <!-- <th>{{ $t('queueStatus.job.groupId') }}</th>
+            <th>{{ $t('queueStatus.job.userId') }}</th> -->
             <th>{{ $t('queueStatus.job.jobId') }}</th>
             <th>{{ $t('queueStatus.job.jobType') }}</th>
             <th>{{ $t('queueStatus.job.yamlFile') }}</th>
@@ -61,8 +61,8 @@
         <tbody>
           <tr v-for="q in trainQueueData" :key="q.id">
             <td>{{ q.submission_time }}</td>
-            <td>{{ q.group_id }}</td>
-            <td>{{ q.user_id }}</td>
+            <!-- <td>{{ q.group_id }}</td>
+            <td>{{ q.user_id }}</td> -->
             <td>{{ q.job_id }}</td>
             <td>{{ q.job_type }}</td>
             <td>
@@ -78,8 +78,8 @@
         <thead>
           <tr>
             <th>{{ $t('queueStatus.job.submissionTime') }}</th>
-            <th>{{ $t('queueStatus.job.groupId') }}</th>
-            <th>{{ $t('queueStatus.job.userId') }}</th>
+            <!-- <th>{{ $t('queueStatus.job.groupId') }}</th>
+            <th>{{ $t('queueStatus.job.userId') }}</th> -->
             <th>{{ $t('queueStatus.job.jobId') }}</th>
             <th>{{ $t('queueStatus.job.jobType') }}</th>
             <th>{{ $t('queueStatus.job.yamlFile') }}</th>
@@ -89,8 +89,8 @@
         <tbody>
           <tr v-for="q in serviceQueueData" :key="q.id">
             <td>{{ q.submission_time }}</td>
-            <td>{{ q.group_id }}</td>
-            <td>{{ q.user_id }}</td>
+            <!-- <td>{{ q.group_id }}</td>
+            <td>{{ q.user_id }}</td> -->
             <td>{{ q.job_id }}</td>
             <td>{{ q.job_type }}</td>
             <td>

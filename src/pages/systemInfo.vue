@@ -34,7 +34,7 @@
         </tbody>
       </table>
     </va-card>
-    <h1 class="section-header">工作組別狀態 Group Infomation</h1>
+    <!-- <h1 class="section-header">工作組別狀態 Group Infomation</h1>
     <va-card>
       <va-select
         :label="$t('groupInfo.groupSelect')"
@@ -117,7 +117,7 @@
           </tr>
         </tbody>
       </table>
-    </va-card>
+    </va-card> -->
   </div>
 </template>
 

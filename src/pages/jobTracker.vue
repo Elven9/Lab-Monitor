@@ -6,8 +6,8 @@
       <table class="va-table jobInfo">
         <thead>
           <tr>
-            <th>{{ $t('jobTracker.field.groupId') }}</th>
-            <th>{{ $t('jobTracker.field.userId') }}</th>
+            <!-- <th>{{ $t('jobTracker.field.groupId') }}</th>
+            <th>{{ $t('jobTracker.field.userId') }}</th> -->
             <th>{{ $t('jobTracker.field.jobId') }}</th>
             <th>{{ $t('jobTracker.field.jobType') }}</th>
             <th>{{ $t('jobTracker.field.submissionTime') }}</th>
@@ -22,8 +22,8 @@
 
         <tbody>
           <tr v-for="j in jobs" :key="j.id">
-            <td>{{ j.group_id }}</td>
-            <td>{{ j.user_id }}</td>
+            <!-- <td>{{ j.group_id }}</td>
+            <td>{{ j.user_id }}</td> -->
             <td>{{ j.job_id }}</td>
             <td>{{ j.job_type }}</td>
             <td>{{ j.submission_time }}</td>

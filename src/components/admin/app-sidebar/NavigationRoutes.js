@@ -34,10 +34,10 @@ export const navigationRoutes = {
       },
       disabled: true,
       children: [
-        {
-          name: 'usage',
-          displayName: 'menu.usage',
-        },
+        // {
+        //   name: 'usage',
+        //   displayName: 'menu.usage',
+        // },
         {
           name: 'allocation',
           displayName: 'menu.allocation',

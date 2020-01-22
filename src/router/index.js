@@ -36,11 +36,11 @@ export default new Router({
       path: '/resource',
       component: AppLayout,
       children: [
-        {
-          name: 'usage',
-          path: 'usage',
-          component: () => import('../pages/resource/Usage.vue'),
-        },
+        // {
+        //   name: 'usage',
+        //   path: 'usage',
+        //   component: () => import('../pages/resource/Usage.vue'),
+        // },
         {
           name: 'allocation',
           path: 'allocation',
