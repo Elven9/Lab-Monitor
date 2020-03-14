@@ -1,9 +1,9 @@
-// const api = require('./index').api
+const api = require('./index').api
 const mockEntry = require('./mockEntry')
 
 exports.getHardwareSpec = () => {
-  // return api('/system/hardwareSpec')
-  return mockEntry.getHardwareSpec()
+  return api('/system/hardwareSpec')
+  // return mockEntry.getHardwareSpec()
 }
 
 exports.getGroupInfo = (groupName) => {

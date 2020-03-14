@@ -133,67 +133,62 @@ exports.getResourceAllocation = (payload) => {
   let mockPayload = []
 
   // Prepare CPU
-  if (payload.resource.indexOf(0) !== -1) {
-    for (let i = 0; i < payload.identifier.length; i++) {
-      let load = {
-        'resource': 0,
-        'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
-        'data|0-4': [
-          {
-            'jobId|0-10000': 1,
-            'usage|0-100': 1,
-            'location': {
-              'nodeId|0': 1,
-              'podId|0-3': 1,
-            },
-          },
-        ],
-      }
-      mockPayload.push(load)
+  for (let i = 0; i < payload.identifier.length; i++) {
+    let load = {
+      'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
+      'data|0-4': [
+        {
+          'nodeId': 'k8s-api-0',
+          'podId|0-3': 1,
+          'cpuUsage': '1 cores',
+          'memUsage': '4 GB',
+        },
+      ],
     }
+    mockPayload.push(load)
   }
 
-  // Prepare GPU
-  if (payload.resource.indexOf(1) !== -1) {
-    for (let i = 0; i < payload.identifier.length; i++) {
-      let load = {
-        'resource': 1,
-        'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
-        'data|0-4': [
-          {
-            'jobId|0-10000': 1,
-            'usage|0-100': 1,
-            'location': {
-              'nodeId|0': 1,
-              'podId|0-3': 1,
-            },
-          },
-        ],
-      }
-      mockPayload.push(load)
-    }
-  }
+  // // Prepare GPU
+  // if (payload.resource.indexOf(1) !== -1) {
+  //   for (let i = 0; i < payload.identifier.length; i++) {
+  //     let load = {
+  //       'resource': 1,
+  //       'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
+  //       'data|0-4': [
+  //         {
+  //           'jobId|0-10000': 1,
+  //           'usage|0-100': 1,
+  //           'location': {
+  //             'nodeId|0': 1,
+  //             'podId|0-3': 1,
+  //           },
+  //         },
+  //       ],
+  //     }
+  //     mockPayload.push(load)
+  //   }
+  // }
 
-  // Prepare Memory
-  if (payload.resource.indexOf(2) !== -1) {
-    for (let i = 0; i < payload.identifier.length; i++) {
-      let load = {
-        'resource': 2,
-        'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
-        'data|0-4': [
-          {
-            'jobId|0-10000': 1,
-            'usage|0-100': 1,
-            'location': {
-              'nodeId|0': 1,
-              'podId|0-3': 1,
-            },
-          },
-        ],
-      }
-      mockPayload.push(load)
-    }
-  }
+  // // Prepare Memory
+  // if (payload.resource.indexOf(2) !== -1) {
+  //   for (let i = 0; i < payload.identifier.length; i++) {
+  //     let load = {
+  //       'resource': 2,
+  //       'identifier': { type: payload.identifier[i].type, id: payload.identifier[i].id },
+  //       'data|0-4': [
+  //         {
+  //           'jobId|0-10000': 1,
+  //           'usage|0-100': 1,
+  //           'location': {
+  //             'nodeId|0': 1,
+  //             'podId|0-3': 1,
+  //           },
+  //         },
+  //       ],
+  //     }
+  //     mockPayload.push(load)
+  //   }
+  // }
 
   return Mock.mock({
     'data': mockPayload,

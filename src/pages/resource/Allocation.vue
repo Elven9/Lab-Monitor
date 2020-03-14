@@ -27,12 +27,12 @@
               <va-item :key="t.id+idx">
                 <va-item-section>
                   <va-item-label>
-                    {{ `${t.type}, id: ${t.id}` }}
+                    {{ `${t.type}: ${t.id}` }}
                   </va-item-label>
 
-                  <va-item-label caption>
+                  <!-- <va-item-label caption>
                     {{ `${t.start} ~ ${t.end}` }}
-                  </va-item-label>
+                  </va-item-label> -->
                 </va-item-section>
 
                 <va-item-section side>
@@ -51,10 +51,10 @@
     </va-card>
 
     <!-- CPU -->
-    <va-card v-show="isShowingData" :title="$t('resourceAllocation.title.cpu')">
+    <va-card v-show="isShowingData" :title="$t('resourceAllocation.title')">
       <div class="node-list">
-        <div class="node" v-for="(node, idx) in nodesData[0]" :key="node.id">
-          <h1>{{ `Node ${idx}` }}</h1>
+        <div class="node" v-for="node in nodesData" :key="node.id">
+          <h1>{{ node.nodeName }}</h1>
           <div class="node-container">
             <va-chart :data="node.dataPayload" :options="node.option" type="donut" />
           </div>
@@ -63,7 +63,7 @@
     </va-card>
 
     <!-- GPU -->
-    <va-card v-show="isShowingData" :title="$t('resourceAllocation.title.gpu')">
+    <!-- <va-card v-show="isShowingData" :title="$t('resourceAllocation.title.gpu')">
       <div class="node-list">
         <div class="node" v-for="(node, idx) in nodesData[1]" :key="node.id">
           <h1>{{ `Node ${idx}` }}</h1>
@@ -72,10 +72,10 @@
           </div>
         </div>
       </div>
-    </va-card>
+    </va-card> -->
 
     <!-- mem -->
-    <va-card v-show="isShowingData" :title="$t('resourceAllocation.title.mem')">
+    <!-- <va-card v-show="isShowingData" :title="$t('resourceAllocation.title.mem')">
       <div class="node-list">
         <div class="node" v-for="(node, idx) in nodesData[2]" :key="node.id">
           <h1>{{ `Node ${idx}` }}</h1>
@@ -84,7 +84,7 @@
           </div>
         </div>
       </div>
-    </va-card>
+    </va-card> -->
   </div>
 </template>
 
@@ -101,16 +101,17 @@ export default {
         // 'Group',
         // 'User',
         'Job',
-        'Jobtype',
+        // 'Jobtype',
       ],
       resourceId: '',
       resourceTargets: [],
 
       // For Pie Chart
       isShowingData: true,
-      nodesData: [[], [], []],
+      nodesData: [],
       colorSequence: ['primary', 'secondary', 'success', 'info', 'danger', 'warning', 'dark'],
       defaultChartTemplate: {
+        nodeName: 'Node',
         dataPayload: {
           datasets: [
             {
@@ -125,7 +126,9 @@ export default {
           title: { display: false },
         },
       },
-      nodeCount: 1,
+      nodeNameList: [
+        'k8s-api-0',
+      ],
     }
   },
   methods: {
@@ -146,7 +149,6 @@ export default {
     async submit () {
       // Process Payload
       let payload = {
-        resource: [0, 1, 2], // Get All Resource, CPU, GPU, Memory
         identifier: this.resourceTargets,
       }
       let data = await getResourceAllocation(payload)
@@ -155,30 +157,33 @@ export default {
     updateData (data) {
       this.isShowingData = false
 
-      let newData = [[], [], []]
+      // let newData = [[], [], []]
+      let newData = []
 
       // Add Default Pie Data
-      for (let i = 0; i < this.nodeCount; i++) {
+      for (let i = 0; i < this.nodeNameList.length; i++) {
         // Deep Clone You Mother Fucker.
-        newData[0].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
-        newData[1].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
-        newData[2].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
+        newData.push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
+        // newData[1].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
+        // newData[2].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
       }
 
       // Process Data
+      // Extract Identifier Information
       for (let i = 0; i < data.length; i++) {
+        if (data[i].data == null) continue
+        // Pod Data
         for (let j = 0; j < data[i].data.length; j++) {
-          let labelName = `Pod ID: ${data[i].data[j].location.podId}`
-
-          if (newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.labels[0] === 'None') {
-            newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.datasets[0].data = []
-            newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.datasets[0].backgroundColor = []
-            newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.labels = []
+          if (newData[this.nodeNameList.indexOf(data[i].data[j].nodeId)].dataPayload.labels[0] === 'None') {
+            newData[this.nodeNameList.indexOf(data[i].data[j].nodeId)].nodeName = data[i].data[j].nodeId
+            newData[this.nodeNameList.indexOf(data[i].data[j].nodeId)].dataPayload.datasets[0].data = []
+            newData[this.nodeNameList.indexOf(data[i].data[j].nodeId)].dataPayload.datasets[0].backgroundColor = []
+            newData[this.nodeNameList.indexOf(data[i].data[j].nodeId)].dataPayload.labels = []
           }
 
-          newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.datasets[0].data.push(data[i].data[j].usage)
-          newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.datasets[0].backgroundColor.push(hex2rgb(this.$themes[this.colorSequence[newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.datasets[0].data.length - 1]], 1).css)
-          newData[data[i].resource][data[i].data[j].location.nodeId].dataPayload.labels.push(labelName)
+          newData[this.nodeNameList.indexOf(data[i].data[j].nodeId)].dataPayload.datasets[0].data.push(1)
+          newData[this.nodeNameList.indexOf(data[i].data[j].nodeId)].dataPayload.datasets[0].backgroundColor.push(hex2rgb(this.$themes[this.colorSequence[newData[this.nodeNameList.indexOf(data[i].data[j].nodeId)].dataPayload.datasets[0].data.length - 1]], 1).css)
+          newData[this.nodeNameList.indexOf(data[i].data[j].nodeId)].dataPayload.labels.push(`${data[i].data[j].podId}${data[i].data[j].cpuUsage !== ' core(s)' ? `, ${data[i].data[j].cpuUsage}` : ''}${data[i].data[j].memUsage !== '' ? `, ${data[i].data[j].memUsage}` : ''}`)
         }
       }
 
@@ -198,10 +203,10 @@ export default {
       for (let j = 0; j < target.length; j++) {
         let donuts = target[j].getElementsByTagName('canvas')
         for (let i = 0; i < donuts.length; i++) {
-          donuts[i].width = 40
-          donuts[i].height = 40
-          donuts[i].style.width = `200px`
-          donuts[i].style.height = `200px`
+          donuts[i].width = 100
+          donuts[i].height = 100
+          donuts[i].style.width = `300px`
+          donuts[i].style.height = `300px`
         }
       }
     },
@@ -216,10 +221,8 @@ export default {
   },
   created () {
     // Add Default Pie Data
-    for (let i = 0; i < this.nodeCount; i++) {
-      this.nodesData[0].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
-      this.nodesData[1].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
-      this.nodesData[2].push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
+    for (let i = 0; i < this.nodeNameList.length; i++) {
+      this.nodesData.push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
     }
   },
   mounted () {
@@ -266,7 +269,7 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      max-width: 200px;
+      max-width: 300px;
       min-height: 220px;
       padding: 8px;
       margin: 5px;

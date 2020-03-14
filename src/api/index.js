@@ -1,7 +1,7 @@
 const _axios = require('axios')
 
 // API Setting
-const BASE_URL = 'https://needtochange.com.tw'
+const BASE_URL = 'http://localhost:9000'
 
 const axios = _axios.create({
   baseURL: BASE_URL,
@@ -16,7 +16,7 @@ async function api (url, method = 'GET', data = {}) {
   if (method === 'GET') {
     response = await axios({ method: 'get', url })
   } else if (method === 'POST') {
-    response = await axios({ method: 'get', url, data })
+    response = await axios({ method: 'post', url, data })
   }
 
   return response
