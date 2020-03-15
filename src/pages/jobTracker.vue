@@ -9,12 +9,12 @@
             <!-- <th>{{ $t('jobTracker.field.groupId') }}</th>
             <th>{{ $t('jobTracker.field.userId') }}</th> -->
             <th>{{ $t('jobTracker.field.jobId') }}</th>
-            <th>{{ $t('jobTracker.field.jobType') }}</th>
+            <!-- <th>{{ $t('jobTracker.field.jobType') }}</th> -->
             <th>{{ $t('jobTracker.field.submissionTime') }}</th>
             <th>{{ $t('jobTracker.field.startTime') }}</th>
             <th>{{ $t('jobTracker.field.endTime') }}</th>
             <th>{{ $t('jobTracker.field.exeTime') }}</th>
-            <th>{{ $t('jobTracker.field.waitTime') }}</th>
+            <!-- <th>{{ $t('jobTracker.field.waitTime') }}</th> -->
             <th>{{ $t('jobTracker.field.state') }}</th>
             <th>{{ $t('jobTracker.field.yamlDownload') }}</th>
           </tr>
@@ -25,12 +25,12 @@
             <!-- <td>{{ j.group_id }}</td>
             <td>{{ j.user_id }}</td> -->
             <td>{{ j.job_id }}</td>
-            <td>{{ j.job_type }}</td>
+            <!-- <td>{{ j.job_type }}</td> -->
             <td>{{ j.submission_time }}</td>
             <td>{{ j.start_time }}</td>
             <td>{{ j.end_time }}</td>
-            <td>{{ `${j.exe_time} hr` }}</td>
-            <td>{{ `${j.wait_time} hr` }}</td>
+            <td>{{ j.exe_time }}</td>
+            <!-- <td>{{ `${j.wait_time} hr` }}</td> -->
             <td>
               <va-badge v-if="j.state == 0" color="success">Completed</va-badge>
               <va-badge v-if="j.state == 1" color="info">Running</va-badge>
