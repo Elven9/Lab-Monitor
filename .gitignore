@@ -12,6 +12,8 @@ yarn-debug.log*
 yarn-error.log*
 inspect.js
 
+package-lock.json
+
 # Editor directories and files
 .idea
 .vscode

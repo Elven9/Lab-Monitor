@@ -1,4 +1,95 @@
 {
+  "resource": {
+    "cardTitle": {
+      "gpu": "圖形處理器 Graphic Process Unit",
+      "cpu": "中央處理器 Central Process Unit",
+      "memory": "記憶體用量 Memory Usage",
+      "nodeStatus": "節點資源分配狀態 Node Status",
+      "form": "輸入資訊 Form"
+    },
+    "select": {
+      "resourceType": {
+        "title": "選擇資源類別 Resource Type"
+      } 
+    },
+    "button": {
+      "addTarget": "新增資源",
+      "submit": "送出資料"
+    },
+    "dateTime": {
+      "start": "開始時間",
+      "end": "結束時間"
+    }
+  },
+  "resourceAllocation": {
+    "title": "資源使用分布狀況 Resource Allocation"
+  },
+  "systemInfo": {
+    "nodeType": "類別 Node Type",
+    "nodeCount": "數量 Node Count",
+    "cpuType": "處理器類型 CPU Type",
+    "cpuCapacity": "Capacity",
+    "cpuCount": "核心數量 CPU Core Count",
+    "memorySize": "記憶體大小 / Node",
+    "gpuType": "GPU 種類",
+    "gpuCapacity": "GPU Capacity",
+    "gpuCount": "GPU 核心數量",
+    "memorySizePerGpu": "記憶體大小 / GPU"
+  },
+  "queueStatus": {
+    "title": {
+      "queueType": "佇列種類",
+      "avgJobWaitTime": "平均工作等待時間",
+      "avgQueueLen": "平均佇列長度",
+      "interactiveQueue": "Interactive Queue",
+      "trainQueue": "Train Queue",
+      "serviceQueue": "Service Queue"
+    },
+    "job": {
+      "submissionTime": "提交時間",
+      "groupId": "群組 ID",
+      "userId": "使用者 ID",
+      "jobId": "工作 ID",
+      "jobType": "工作種類",
+      "yamlFile": "YAML 檔下載"
+    }
+  },
+  "groupInfo" :{
+    "groupSelect": "請選擇目標群組 Please Select Group",
+    "groupTable": {
+      "nodeType": "類別 Node Type",
+      "nodeCount":"數量 Node Count",
+      "cpuUsage": "CPU 用量狀況",
+      "hostMemoryUsage": "主機記憶體用量狀況",
+      "gpuUsage": "GPU 用量狀況",
+      "gpuMemoryUsage": "GPU 記憶體用量狀況"
+    }
+  },
+  "userInfo" :{
+    "userSelect": "請選擇目標使用者 Please Select User",
+    "userTable": {
+      "nodeType": "類別 Node Type",
+      "cpuUsage": "CPU 用量狀況",
+      "hostMemoryUsage": "主機記憶體用量狀況",
+      "gpuUsage": "GPU 用量狀況",
+      "gpuMemoryUsage": "GPU 記憶體用量狀況"
+    }
+  },
+  "jobTracker": {
+    "field": {
+      "jobId": "工作 ID",
+      "groupId": "群組 ID",
+      "userId": "使用者 ID",
+      "jobType": "工作類別",
+      "submissionTime": "提交時間",
+      "startTime": "開始執行時間",
+      "endTime": "結束執行時間",
+      "exeTime": "執行時間",
+      "waitTime": "等待時間",
+      "state": "目前狀態",
+      "yamlDownload": "YAML 檔下載"
+    }
+  },
   "auth": {
     "agree": "I agree to",
     "createAccount": "Create account",
@@ -275,6 +366,13 @@
     "simplified_chinese": "Simplified Chinese"
   },
   "menu": {
+    "systemInfo": "系統狀態 System Information",
+    "queue": "佇列目前狀態 Queue Status",
+    "hardware": "硬體設備 Hardware",
+    "resource": "資源管理 Resource Management",
+    "usage": "資源使用狀況 Resource Usage",
+    "allocation": "資源分配狀況 Resource Allocation",
+    "jobTracker": "工作追蹤 Job Tracker",
     "auth": "Auth",
     "rating": "Rating",
     "buttons": "Buttons",
