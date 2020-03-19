@@ -91,6 +91,7 @@
 <script>
 import { hex2rgb } from '../../services/color-functions'
 import { getResourceAllocation } from '../../api/resource.js'
+import { getHardwareSpec } from '../../api/system.js'
 
 export default {
   data () {
@@ -126,9 +127,7 @@ export default {
           title: { display: false },
         },
       },
-      nodeNameList: [
-        'k8s-api-0',
-      ],
+      nodeNameList: [],
     }
   },
   methods: {
@@ -219,10 +218,18 @@ export default {
       return this.resourceTargets.length !== 0
     },
   },
-  created () {
+  async created () {
+    let hardwareSpec = await getHardwareSpec()
+
+    hardwareSpec.data.forEach(h => {
+      this.nodeNameList.push(h.node_type)
+    })
+
     // Add Default Pie Data
     for (let i = 0; i < this.nodeNameList.length; i++) {
-      this.nodesData.push(JSON.parse(JSON.stringify(this.defaultChartTemplate)))
+      let newNodeData = JSON.parse(JSON.stringify(this.defaultChartTemplate))
+      newNodeData.nodeName = this.nodeNameList[i]
+      this.nodesData.push(newNodeData)
     }
   },
   mounted () {
