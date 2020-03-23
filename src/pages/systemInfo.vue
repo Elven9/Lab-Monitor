@@ -26,7 +26,7 @@
             <td>{{ h.cpu_capacity }}</td>
             <td>{{ h.cpu_count }}</td>
             <td>{{ h.memory_size }}</td>
-            <td>{{ h.gpu_type }}</td>
+            <td>{{ h.gqu_type }}</td>
             <td>{{ h.gpu_capacity }}</td>
             <td>{{ h.gpu_count }}</td>
             <td>{{ h.gpu_memory_size }}</td>

@@ -28,8 +28,8 @@
             <!-- <td>{{ j.job_type }}</td> -->
             <td>{{ j.submission_time }}</td>
             <td>{{ j.start_time }}</td>
-            <td>{{ j.end_time }}</td>
-            <td>{{ j.exe_time }}</td>
+            <td>{{ j.end_time == "" ? "尚未結束" : j.end_time }}</td>
+            <td>{{ j.exe_time == "" ? "尚未結束" : j.exe_time }}</td>
             <!-- <td>{{ `${j.wait_time} hr` }}</td> -->
             <td>
               <va-badge v-if="j.state == 0" color="success">Completed</va-badge>
