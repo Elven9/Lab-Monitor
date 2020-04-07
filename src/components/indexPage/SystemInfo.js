@@ -53,13 +53,13 @@ class SystemInfo extends React.Component {
             <TableBody>
               {this.state.data.map(node => (
                 <TableRow key={node.node_name}>
-                  <TableCell scope="row">
+                  <TableCell classes={{root: styles['table-cell']}} scope="row">
                     {node.node_name}
                   </TableCell>
-                  <TableCell align="right">{node.node_infp}</TableCell>
-                  <TableCell align="right">{node.cpu_capacity}</TableCell>
-                  <TableCell align="right">{node.cpu_count}</TableCell>
-                  <TableCell align="right">{node.memory_size}</TableCell>
+                  <TableCell classes={{root: styles['table-cell']}} align="right">{node.node_infp}</TableCell>
+                  <TableCell classes={{root: styles['table-cell']}} align="right">{node.cpu_capacity}</TableCell>
+                  <TableCell classes={{root: styles['table-cell']}} align="right">{node.cpu_count}</TableCell>
+                  <TableCell classes={{root: styles['table-cell']}} align="right">{node.memory_size}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

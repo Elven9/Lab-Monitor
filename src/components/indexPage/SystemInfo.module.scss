@@ -4,13 +4,14 @@ $table-border-width: 2px;
 
 .table {
   width: calc(100% - $table-border-width);
-  border: $table-border-width solid $semi-dark-background;
+  border: $table-border-width solid $font-secondary-color;
 
   .table-head {
-    background-color: $dark-background;
+    background-color: $semi-dark-background;
+  }
 
-    .table-cell {
-      color: $font-primary-color;
-    }
+  .table-cell {
+    color: $font-primary-color;
+    border-color: $font-secondary-color;
   }
 }
