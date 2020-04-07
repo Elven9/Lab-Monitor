@@ -1,22 +1,18 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import VuexI18n from 'vuex-i18n' // load vuex i18n module
-import app from './modules/app'
+import { combineReducers } from 'redux'
 
-import * as getters from './getters'
+// Import Reducer
+import route from './reducers/route'
 
-Vue.use(Vuex)
+// TODO Get Really Push Route
+export const initialState = {
+  route: {
+    current: "/restaurant"
+  }
+}
 
-const store = new Vuex.Store({
-  strict: true, // process.env.NODE_ENV !== 'production',
-  getters,
-  modules: {
-    app,
-  },
-  state: {},
-  mutations: {},
-})
+export const rootReducer =  combineReducers(
+  {
+    route
+  }
+)
 
-Vue.use(VuexI18n.plugin, store)
-
-export default store
