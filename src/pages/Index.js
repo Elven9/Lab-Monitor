@@ -10,7 +10,10 @@ class Index extends React.Component {
   render() {
     return (
       <div className={styles.container}>
-        <SystemInfo></SystemInfo>
+        <div className={styles.section}>
+          <h1>系統狀態</h1>
+          <SystemInfo></SystemInfo>
+        </div>
       </div>
     )
   }

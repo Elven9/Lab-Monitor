@@ -1,5 +1,22 @@
 @import '../style/global.scss';
 
+$section-margin-width: 20px;
+$section-margin-height: 30px;
+
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   @include page-container();
+
+  .section {
+    width: calc(100% - #{$section-margin-width} * 2);
+    margin: $section-margin-height $section-margin-width $section-margin-height $section-margin-width;
+
+    .header {
+      font-size: 36px;
+    }
+  }
 }
