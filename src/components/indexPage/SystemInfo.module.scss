@@ -1,0 +1,16 @@
+@import '../../style/global.scss';
+
+$table-border-width: 2px;
+
+.table {
+  width: calc(100% - $table-border-width);
+  border: $table-border-width solid $semi-dark-background;
+
+  .table-head {
+    background-color: $dark-background;
+
+    .table-cell {
+      color: $font-primary-color;
+    }
+  }
+}

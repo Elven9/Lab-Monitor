@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux'
 import { changeRoute } from './store/actions/route'
 
 // Components
-import Navigation from './layout/Navigation'
 import RouteContainer from './layout/RouteContainer'
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
 
   return (
     <div className="App">
-      <Navigation />
       <RouteContainer />
     </div>
   );

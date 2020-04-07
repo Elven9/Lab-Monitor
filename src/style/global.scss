@@ -27,5 +27,6 @@ $navigation-max-height: 149px;
 
 // Mixin
 @mixin page-container {
-  margin-bottom: $app-border-radius;
+  width: 80%;
+  margin: 0px 10% 0px 10%;
 }
