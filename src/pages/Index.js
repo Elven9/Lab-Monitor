@@ -4,6 +4,7 @@ import React from 'react'
 import SystemInfo from '../components/indexPage/SystemInfo'
 import SchedulingOverview from '../components/indexPage/SchedulingOverview'
 import ResourceUtilization from '../components/indexPage/ResourceUtilization'
+import JobAllocation from '../components/indexPage/JobAllocation'
 
 // Style
 import styles from './Index.module.scss'
@@ -13,7 +14,7 @@ class Index extends React.Component {
     return (
       <div className={styles.container}>
         <div className={styles.section}>
-          <h1 className={styles.header}>系統狀態</h1>
+          <h1 className={styles.header}>System General Information</h1>
           <SystemInfo></SystemInfo>
         </div>
         <div className={styles.section}>
@@ -23,6 +24,10 @@ class Index extends React.Component {
         <div className={styles.section}>
           <h1 className={styles.header}>ResourceUtilization</h1>
           <ResourceUtilization />
+        </div>
+        <div className={styles.section}>
+          <h1 className={styles.header}>Job Allocation Status</h1>
+          <JobAllocation />
         </div>
       </div>
     )
