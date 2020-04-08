@@ -63,7 +63,7 @@ class JobAllocation extends React.Component {
   }
 
   pickAColor() {
-    const colorSequence = ['rgb(255, 52, 95)', 'rgb(255, 134, 49)', 'rgb(255, 187, 63)', 'rgb(50, 184, 183)', 'rgb(32, 151, 228)', 'rgb(145, 88, 250)']
+    const colorSequence = ['rgba(255, 52, 95, 0.8)', 'rgba(255, 134, 49, 0.8)', 'rgba(255, 187, 63, 0.8)', 'rgba(50, 184, 183, 0.8)', 'rgba(32, 151, 228, 0.8)', 'rgba(145, 88, 250, 0.8)']
     const result = colorSequence[this.colorIndex]
     this.colorIndex += 1
     if (this.colorIndex === colorSequence.length) {
@@ -85,7 +85,7 @@ class JobAllocation extends React.Component {
       const data = {
         labels: node.pods === null ? [ 'None' ] : jobNameList,
         datasets: [{
-          backgroundColor: node.pods === null ? 'rgb(62, 67, 74)' : [ jobNameList.map(name => jobToColor.find(map => map[0] === name))[0][1] ],
+          backgroundColor: node.pods === null ? 'rgba(62, 67, 74)' : [ jobNameList.map(name => jobToColor.find(map => map[0] === name))[0][1] ],
           data: node.pods === null ? [100] : jobNameList.map(_ => 100 / jobNameList.length)
         }],
         tooltips: {

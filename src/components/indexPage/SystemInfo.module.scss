@@ -3,7 +3,7 @@
 $table-border-width: 2px;
 
 .table {
-  width: calc(100% - $table-border-width);
+  width: calc(100% - #{$table-border-width});
   border: $table-border-width solid $font-secondary-color;
 
   .table-head {
