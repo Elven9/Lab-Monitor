@@ -1,7 +1,10 @@
 const _axios = require('axios')
 
+const REACT_APP_API_SERVER = process.env.REACT_APP_API_SERVER
+const REACT_APP_PORT = process.env.REACT_APP_PORT
+
 // API Setting
-const BASE_URL = 'http://localhost:9000'
+const BASE_URL = `http://${REACT_APP_API_SERVER}:${REACT_APP_PORT}`
 
 const axios = _axios.create({
   baseURL: BASE_URL,
