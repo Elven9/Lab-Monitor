@@ -3,6 +3,7 @@ import React from 'react'
 // Page Component
 import SystemInfo from '../components/indexPage/SystemInfo'
 import SchedulingOverview from '../components/indexPage/SchedulingOverview'
+import ResourceUtilization from '../components/indexPage/ResourceUtilization'
 
 // Style
 import styles from './Index.module.scss'
@@ -18,6 +19,10 @@ class Index extends React.Component {
         <div className={styles.section}>
           <h1 className={styles.header}>Scheduling Overview</h1>
           <SchedulingOverview />
+        </div>
+        <div className={styles.section}>
+          <h1 className={styles.header}>ResourceUtilization</h1>
+          <ResourceUtilization />
         </div>
       </div>
     )
