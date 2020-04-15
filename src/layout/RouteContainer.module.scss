@@ -11,29 +11,7 @@ $route-select-width: 320px;
 
   .route-selector {
     width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: $box-background;
-
-    .list-item-root {
-      padding: 8px 40px 8px 30px;
-      color: $font-secondary-color;
-    }
-
-    .list-item-selected {
-      background-color: $dark-background;
-      color: $font-primary-color;
-
-      .list-icon {
-        color: $font-primary-color;
-      }
-    }
-
-    .list-icon {
-      color: $font-secondary-color;
-    }
   }
 
   .route-container {

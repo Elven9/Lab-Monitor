@@ -101,7 +101,6 @@ class JobAllocation extends React.Component {
           }
         }
       }
-      console.log(data)
 
       return {
         data,
