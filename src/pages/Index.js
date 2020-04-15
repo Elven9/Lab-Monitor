@@ -2,12 +2,11 @@ import React from 'react'
 
 // Page Component
 import SystemInfo from '../components/indexPage/SystemInfo'
-import SchedulingOverview from '../components/indexPage/SchedulingOverview'
 import ResourceUtilization from '../components/indexPage/ResourceUtilization'
-import JobAllocation from '../components/indexPage/JobAllocation'
+import SchedulingOverview from '../components/indexPage/SchedulingOverview'
 
 // Style
-import styles from './Index.module.scss'
+import styles from './page.module.scss'
 
 class Index extends React.Component {
   render() {
@@ -24,10 +23,6 @@ class Index extends React.Component {
         <div className={styles.section}>
           <h1 className={styles.header}>ResourceUtilization</h1>
           <ResourceUtilization />
-        </div>
-        <div className={styles.section}>
-          <h1 className={styles.header}>Job Allocation Status</h1>
-          <JobAllocation />
         </div>
       </div>
     )
