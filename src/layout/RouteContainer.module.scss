@@ -1,5 +1,45 @@
 @import '../style/global.scss';
+@import '../style/browserCompatibility.scss';
+
+$route-select-width: 320px;
 
 .container {
   width: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  .route-selector {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $box-background;
+
+    .list-item-root {
+      padding: 8px 40px 8px 30px;
+      color: $font-secondary-color;
+    }
+
+    .list-item-selected {
+      background-color: $dark-background;
+      color: $font-primary-color;
+
+      .list-icon {
+        color: $font-primary-color;
+      }
+    }
+
+    .list-icon {
+      color: $font-secondary-color;
+    }
+  }
+
+  .route-container {
+    @include hideScrollBar();
+    width: calc(100% - #{$route-select-width});
+    height: 100vh;
+    overflow-y: scroll;
+  }
 }
