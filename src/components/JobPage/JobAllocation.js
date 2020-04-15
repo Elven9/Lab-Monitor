@@ -47,7 +47,8 @@ class JobAllocation extends React.Component {
     super(props)
 
     this.state = {
-      data: []
+      data: [],
+      chartData: []
     }
 
     this.chartData = []
@@ -59,7 +60,7 @@ class JobAllocation extends React.Component {
   async componentDidMount() {
     const { data } = await api('/resource/allocation')
 
-    this.setState({ data })
+    this.setState({ data }, this.createChart)
   }
 
   pickAColor() {
@@ -73,7 +74,7 @@ class JobAllocation extends React.Component {
   }
   createChart() {
     const jobToColor = []
-    this.chartData = this.state.data.map(node => {
+    const newChartData = this.state.data.map(node => {
       const jobNameList = node.pods === null ? [] : [ ...new Set(node.pods.map(p => p.job_name)) ]
       // Register Color
       jobNameList.forEach(name => {
@@ -107,15 +108,15 @@ class JobAllocation extends React.Component {
         name: node.node_name
       }
     })
+
+    this.setState({ chartData: newChartData })
   }
 
   render() {
-    this.createChart()
-
     return (
       <div className={styles['container']}>
         {
-          this.chartData.map(chartData => (
+          this.state.chartData.map(chartData => (
             <SingleNode key={chartData.name} chartData={chartData.data} name={chartData.name} nodeCount={this.chartData.length} />
           ))
         }

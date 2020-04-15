@@ -23,10 +23,8 @@ class ResourceUtilization extends React.Component {
 
   async componentDidMount() {
     const { data } = await api('resource/utilization')
-    this.setState({ data })
-
-    // Create Chart
-    this.createChart()
+    
+    this.setState({ data }, this.createChart)
   }
 
   createChart() {

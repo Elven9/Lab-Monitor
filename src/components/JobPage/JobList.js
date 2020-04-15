@@ -11,6 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
 
 // Styles
 import styles from './JobList.module.scss'
@@ -29,7 +30,6 @@ class JobList extends React.Component {
   async componentDidMount() {
     const { data } = await api('/job/getJobs')
 
-    console.log(data)
     this.setState({ data })
   }
 
@@ -60,7 +60,8 @@ class JobList extends React.Component {
               <TableCell classes={{root: styles['table-cell']}} align="right">End Time</TableCell>
               <TableCell classes={{root: styles['table-cell']}} align="right">Execution Time</TableCell>
               <TableCell classes={{root: styles['table-cell']}} align="right">Wait Time</TableCell>
-              <TableCell classes={{root: styles['table-cell']}} align="right">Status</TableCell>
+              <TableCell classes={{root: styles['table-cell']}} align="center">Status</TableCell>
+              <TableCell classes={{root: styles['table-cell']}} align="right">More Info</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -74,8 +75,11 @@ class JobList extends React.Component {
                 <TableCell classes={{root: styles['table-cell']}} align="right">{job.end_time}</TableCell>
                 <TableCell classes={{root: styles['table-cell']}} align="right">{job.exe_time}</TableCell>
                 <TableCell classes={{root: styles['table-cell']}} align="right">{job.wait_time}</TableCell>
-                <TableCell classes={{root: styles['table-cell']}} align="right">
+                <TableCell classes={{root: styles['table-cell']}} align="center">
                   <Chip label={this.convertStatus(job.state)} />
+                </TableCell>
+                <TableCell classes={{root: styles['table-cell']}} align="right">
+                <Button variant="contained">Link</Button>
                 </TableCell>
               </TableRow>
             ))}
