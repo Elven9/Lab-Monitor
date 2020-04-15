@@ -85,27 +85,29 @@ class JobAllocation extends React.Component {
       const data = {
         labels: node.pods === null ? [ 'None' ] : jobNameList,
         datasets: [{
-          backgroundColor: node.pods === null ? 'rgba(62, 67, 74)' : [ jobNameList.map(name => jobToColor.find(map => map[0] === name))[0][1] ],
+          backgroundColor: node.pods === null ? 'rgba(62, 67, 74)' : jobNameList.map(name => jobToColor.find(map => map[0] === name)[1]),
           data: node.pods === null ? [100] : jobNameList.map(_ => 100 / jobNameList.length)
         }],
         tooltips: {
           callbacks: {
-            label: () => node.pods === null ? "Free" : jobNameList.map(jobName => {
-              return `${jobName}: ${node.pods.filter(pod => pod.job_name === jobName).map(pod => `${pod.replica_type}-${pod.replca_index}`).join(', ')}`
-            })
+            label: (tooltip, data) => {
+              if (node.pods === null) {
+                return "Free"
+              } else {
+                const jobName = data.labels[tooltip.index]
+                return `${jobName}: ${node.pods.filter(pod => pod.job_name === jobName).map(pod => `${pod.replica_type}-${pod.replca_index}`).join(', ')}`
+              }
+            }
           }
         }
       }
+      console.log(data)
 
       return {
         data,
         name: node.node_name
       }
     })
-
-    console.log(jobToColor)
-    console.log(this.chartData)
-    console.log("Chart Data End")
   }
 
   render() {

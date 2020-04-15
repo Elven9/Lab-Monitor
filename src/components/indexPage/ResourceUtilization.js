@@ -64,7 +64,6 @@ class ResourceUtilization extends React.Component {
           callbacks: {
             label: (target) => {
               const nodeInfo = this.state.data.find(node => node.node_name === target.label)
-              console.log(nodeInfo)
               if (target.datasetIndex === 0) {
                 return `CPU Usage: ${nodeInfo.aggregate_cpu} / ${nodeInfo.maxima_cpu} core(s)`
               } else {
