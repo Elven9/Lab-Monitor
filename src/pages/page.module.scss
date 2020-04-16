@@ -2,14 +2,14 @@
 
 $section-margin-width: 20px;
 $section-margin-height: 30px;
-
+  
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  @include page-container();
+  width: 90%;
+  margin: 0px 5% 0px 5%;
 
   .section {
     width: calc(100% - #{$section-margin-width} * 2);
