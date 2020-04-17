@@ -1,0 +1,19 @@
+@import '../../style/global.scss';
+
+.container {
+  background-color: $box-background;
+
+  .list-root {
+    width: 100%;
+    color: $font-primary-color;
+
+    .list-item-root {
+      width: 100%;
+      color: $font-primary-color;
+
+      .list-icon-root {
+        color: $font-primary-color;
+      }
+    }
+  }
+}

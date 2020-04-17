@@ -1,5 +1,23 @@
 @import '../style/global.scss';
+@import '../style/browserCompatibility.scss';
+
+$route-select-width: 320px;
 
 .container {
   width: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  .route-selector {
+    width: 300px;
+    background-color: $box-background;
+  }
+
+  .route-container {
+    @include hideScrollBar();
+    width: calc(100% - #{$route-select-width});
+    height: 100vh;
+    overflow-y: scroll;
+  }
 }

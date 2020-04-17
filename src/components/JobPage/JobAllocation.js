@@ -47,7 +47,8 @@ class JobAllocation extends React.Component {
     super(props)
 
     this.state = {
-      data: []
+      data: [],
+      chartData: []
     }
 
     this.chartData = []
@@ -59,11 +60,11 @@ class JobAllocation extends React.Component {
   async componentDidMount() {
     const { data } = await api('/resource/allocation')
 
-    this.setState({ data })
+    this.setState({ data }, this.createChart)
   }
 
   pickAColor() {
-    const colorSequence = ['rgba(255, 52, 95, 0.8)', 'rgba(255, 134, 49, 0.8)', 'rgba(255, 187, 63, 0.8)', 'rgba(50, 184, 183, 0.8)', 'rgba(32, 151, 228, 0.8)', 'rgba(145, 88, 250, 0.8)']
+    const colorSequence = ['rgba(255, 52, 95, 0.6)', 'rgba(255, 134, 49, 0.6)', 'rgba(255, 187, 63, 0.6)', 'rgba(50, 184, 183, 0.6)', 'rgba(32, 151, 228, 0.6)', 'rgba(145, 88, 250, 0.6)']
     const result = colorSequence[this.colorIndex]
     this.colorIndex += 1
     if (this.colorIndex === colorSequence.length) {
@@ -73,7 +74,7 @@ class JobAllocation extends React.Component {
   }
   createChart() {
     const jobToColor = []
-    this.chartData = this.state.data.map(node => {
+    const newChartData = this.state.data.map(node => {
       const jobNameList = node.pods === null ? [] : [ ...new Set(node.pods.map(p => p.job_name)) ]
       // Register Color
       jobNameList.forEach(name => {
@@ -85,14 +86,19 @@ class JobAllocation extends React.Component {
       const data = {
         labels: node.pods === null ? [ 'None' ] : jobNameList,
         datasets: [{
-          backgroundColor: node.pods === null ? 'rgba(62, 67, 74)' : [ jobNameList.map(name => jobToColor.find(map => map[0] === name))[0][1] ],
+          backgroundColor: node.pods === null ? 'rgba(62, 67, 74)' : jobNameList.map(name => jobToColor.find(map => map[0] === name)[1]),
           data: node.pods === null ? [100] : jobNameList.map(_ => 100 / jobNameList.length)
         }],
         tooltips: {
           callbacks: {
-            label: () => node.pods === null ? "Free" : jobNameList.map(jobName => {
-              return `${jobName}: ${node.pods.filter(pod => pod.job_name === jobName).map(pod => `${pod.replica_type}-${pod.replca_index}`).join(', ')}`
-            })
+            label: (tooltip, data) => {
+              if (node.pods === null) {
+                return "Free"
+              } else {
+                const jobName = data.labels[tooltip.index]
+                return `${jobName}: ${node.pods.filter(pod => pod.job_name === jobName).map(pod => `${pod.replica_type}-${pod.replca_index}`).join(', ')}`
+              }
+            }
           }
         }
       }
@@ -103,18 +109,14 @@ class JobAllocation extends React.Component {
       }
     })
 
-    console.log(jobToColor)
-    console.log(this.chartData)
-    console.log("Chart Data End")
+    this.setState({ chartData: newChartData })
   }
 
   render() {
-    this.createChart()
-
     return (
       <div className={styles['container']}>
         {
-          this.chartData.map(chartData => (
+          this.state.chartData.map(chartData => (
             <SingleNode key={chartData.name} chartData={chartData.data} name={chartData.name} nodeCount={this.chartData.length} />
           ))
         }

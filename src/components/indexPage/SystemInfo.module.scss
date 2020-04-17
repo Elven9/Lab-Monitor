@@ -2,17 +2,26 @@
 
 $table-border-width: 2px;
 
-.table {
-  width: calc(100% - #{$table-border-width});
-  border: $table-border-width solid $font-secondary-color;
+.container {
+  min-height: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-  .table-head {
-    background-color: $semi-dark-background;
-  }
-
-  .table-cell {
-    color: $font-primary-color;
-    border-color: $font-secondary-color;
-    background-color: $semi-dark-background;
+  .table {
+    width: calc(100% - #{$table-border-width});
+    border: $table-border-width solid $font-secondary-color;
+  
+    .table-head {
+      background-color: $semi-dark-background;
+    }
+  
+    .table-cell {
+      color: $font-primary-color;
+      border-color: $font-secondary-color;
+      background-color: $semi-dark-background;
+    }
   }
 }

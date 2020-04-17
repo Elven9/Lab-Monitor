@@ -1,0 +1,13 @@
+@import '../style/global.scss';
+@import './page.module.scss';
+
+.split-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  div {
+    width: 50%;
+  }
+}
