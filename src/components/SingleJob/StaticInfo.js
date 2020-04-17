@@ -24,7 +24,6 @@ function convertStatus(status) {
 }
 
 function StaticInfo({ data }) {
-  console.log(data)
   if (data === null) return null
   return (
     <div className={styles['container']}>

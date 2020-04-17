@@ -8,6 +8,7 @@ import { api } from '../api/index'
 
 // Component
 import StaticInfo from '../components/SingleJob/StaticInfo'
+import JobRadarChart from '../components/SingleJob/JobRadarChart'
 
 // Styles
 import styles from './SingleJob.module.scss'
@@ -17,7 +18,8 @@ class SingleJob extends React.Component {
     super(props)
 
     this.state = {
-      data: null
+      data: null,
+      nodeNameList: []
     }
 
     this.componentDidMount = this.componentDidMount.bind(this)
@@ -25,8 +27,12 @@ class SingleJob extends React.Component {
 
   async componentDidMount() {
     const { data } = await api(`/job/getJob?name=${this.props.match.params.id}`)
+    const nodeList = await api('/system/hardwareSpec')
 
-    this.setState({ data })
+    this.setState({
+      data,
+      nodeNameList: nodeList.data.map(node => node.node_name)
+    })
   }
 
   render() {
@@ -36,6 +42,7 @@ class SingleJob extends React.Component {
           <h1 className={styles.header}>Job Info</h1>
           <div className={styles['split-panel']}>
             <StaticInfo data={this.state.data} />
+            <JobRadarChart data={this.state.data} node={this.state.nodeNameList} />
           </div>
         </div>
       </div>

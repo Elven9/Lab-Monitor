@@ -3,6 +3,9 @@ import React from 'react'
 // API
 import { api } from '../../api/index'
 
+// React Router Dom
+import { withRouter } from "react-router";
+
 // Material UI
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -79,7 +82,7 @@ class JobList extends React.Component {
                   <Chip label={this.convertStatus(job.state)} />
                 </TableCell>
                 <TableCell classes={{root: styles['table-cell']}} align="right">
-                <Button variant="contained">Link</Button>
+                <Button variant="contained" onClick={ () => { this.props.history.push(`/job/${job.job_name}`) } }>Link</Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -90,4 +93,4 @@ class JobList extends React.Component {
   }
 }
 
-export default JobList
+export default withRouter(JobList)
