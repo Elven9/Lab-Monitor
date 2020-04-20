@@ -18,15 +18,20 @@ class JobRadarChart extends React.Component {
     const ctx = document.getElementById('job-radar-chart')
 
     // Construct Chart Data
-    const nodePodCount = new Array(this.props.node.length).fill(0)
+    const workerCount = new Array(this.props.node.length).fill(0)
+    const psCount = new Array(this.props.node.length).fill(0)
 
-    this.props.data.worker_node_pair.forEach(pod => {
-      if (!pod.worker.includes('worker')) return
-      nodePodCount[this.props.node.indexOf(pod.node)]++
-    })
+    if (this.props.data.worker_node_pair !== null) {
+      this.props.data.worker_node_pair.forEach(pod => {
+        if (pod.worker.includes('worker'))
+          workerCount[this.props.node.indexOf(pod.node)]++
+        else
+          psCount[this.props.node.indexOf(pod.node)]++
+      })
+    }
 
     // Max Length
-    const maxScale = nodePodCount.slice(0, nodePodCount.length).sort()[nodePodCount.length-1]
+    const maxScale = workerCount.slice(0, workerCount.length).sort()[workerCount.length-1]
 
     new Chart(ctx, {
       type: "radar",
@@ -34,11 +39,17 @@ class JobRadarChart extends React.Component {
         labels: this.props.node,
         datasets: [
           {
-            label: this.props.data.info.job_name,
+            label: "Worker",
             borderColor: 'rgba(255, 52, 95)',
             backgroundColor: "rgba(255, 52, 95, 0.6)",
-            data: nodePodCount
+            data: workerCount
           },
+          {
+            label: "Parameter Sever",
+            borderColor: 'rgba(246, 189, 78)',
+            backgroundColor: "rgba(246, 189, 78, 0.6)",
+            data: psCount
+          }
         ]
       },
       options: {
@@ -46,6 +57,11 @@ class JobRadarChart extends React.Component {
           display: true,
           position: 'bottom',
           text: "Worker 分布在各個 Node 上狀況"
+        },
+        tooltips: {
+          callbacks: {
+            label: (tooltip, data) => `On ${data.labels[tooltip.index]}, ps: ${data.datasets[tooltip.datasetIndex].data[tooltip.index]}; worker: ${data.datasets[tooltip.datasetIndex].data[tooltip.index]}`
+          }
         },
         scale: {
           gridLines: {

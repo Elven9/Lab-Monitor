@@ -33,7 +33,7 @@ class JobList extends React.Component {
   async componentDidMount() {
     const { data } = await api('/job/getJobs')
 
-    this.setState({ data })
+    if (data !== null) this.setState({ data })
   }
 
   convertStatus(status) {
@@ -58,9 +58,8 @@ class JobList extends React.Component {
           <TableHead classes={{ root: styles['table-head'] }}>
             <TableRow>
               <TableCell classes={{root: styles['table-cell']}}>Job Name</TableCell>
-              <TableCell classes={{root: styles['table-cell']}} align="right">Submit Time</TableCell>
-              <TableCell classes={{root: styles['table-cell']}} align="right">Start Time</TableCell>
-              <TableCell classes={{root: styles['table-cell']}} align="right">End Time</TableCell>
+              <TableCell classes={{root: styles['table-cell']}} align="right">Worker Pod Count</TableCell>
+              <TableCell classes={{root: styles['table-cell']}} align="right">Ps Pod Count</TableCell>
               <TableCell classes={{root: styles['table-cell']}} align="right">Execution Time</TableCell>
               <TableCell classes={{root: styles['table-cell']}} align="right">Wait Time</TableCell>
               <TableCell classes={{root: styles['table-cell']}} align="center">Status</TableCell>
@@ -69,13 +68,12 @@ class JobList extends React.Component {
           </TableHead>
           <TableBody>
             {this.state.data.map(job => (
-              <TableRow key={job.job_id}>
+              <TableRow key={job.job_name}>
                 <TableCell classes={{root: styles['table-cell']}} scope="row">
                   {job.job_name}
                 </TableCell>
-                <TableCell classes={{root: styles['table-cell']}} align="right">{job.submission_time}</TableCell>
-                <TableCell classes={{root: styles['table-cell']}} align="right">{job.start_time}</TableCell>
-                <TableCell classes={{root: styles['table-cell']}} align="right">{job.end_time}</TableCell>
+                <TableCell classes={{root: styles['table-cell']}} align="right">{job.worker_count}</TableCell>
+                <TableCell classes={{root: styles['table-cell']}} align="right">{job.ps_count}</TableCell>
                 <TableCell classes={{root: styles['table-cell']}} align="right">{job.exe_time}</TableCell>
                 <TableCell classes={{root: styles['table-cell']}} align="right">{job.wait_time}</TableCell>
                 <TableCell classes={{root: styles['table-cell']}} align="center">
