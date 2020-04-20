@@ -80,7 +80,7 @@ class JobList extends React.Component {
                   <Chip label={this.convertStatus(job.state)} />
                 </TableCell>
                 <TableCell classes={{root: styles['table-cell']}} align="right">
-                <Button variant="contained" onClick={ () => { this.props.history.push(`/job/${job.job_name}`) } }>Link</Button>
+                <Button variant="contained" onClick={ () => { this.props.history.push(`/job/${job.job_name.split("/")[1]}`) } }>Link</Button>
                 </TableCell>
               </TableRow>
             ))}
