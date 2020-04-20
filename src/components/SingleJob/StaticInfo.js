@@ -28,31 +28,28 @@ function StaticInfo({ data }) {
   return (
     <div className={styles['container']}>
       <List classes={{ root: styles['list-root'] }} dense aria-label="main mailbox folders">
-        <ListItem classes={{ root: styles['list-item-root'] }} button>
+        <ListItem classes={{ root: styles['list-item-root'] }}>
           <ListItemText primary={`TFJob 名稱： ${data.info.job_name}`} />
         </ListItem>
-        <ListItem classes={{ root: styles['list-item-root'] }} button>
-          <ListItemText primary={`TFJob UID： ${data.info.job_id}`} />
-        </ListItem>
-        <ListItem classes={{ root: styles['list-item-root'] }} button>
+        <ListItem classes={{ root: styles['list-item-root'] }}>
           <ListItemText primary={`提交時間戳記： ${data.info.submission_time}`} />
         </ListItem>
-        <ListItem classes={{ root: styles['list-item-root'] }} button>
+        <ListItem classes={{ root: styles['list-item-root'] }}>
           <ListItemText primary={`開始執行時間： ${data.info.start_time}`} />
         </ListItem>
-        <ListItem classes={{ root: styles['list-item-root'] }} button>
+        <ListItem classes={{ root: styles['list-item-root'] }}>
           <ListItemText primary={`結束執行時間： ${data.info.end_time}`} />
         </ListItem>
-        <ListItem classes={{ root: styles['list-item-root'] }} button>
+        <ListItem classes={{ root: styles['list-item-root'] }}>
           <ListItemText primary={`執行時長： ${data.info.exe_time}`} />
         </ListItem>
-        <ListItem classes={{ root: styles['list-item-root'] }} button>
+        <ListItem classes={{ root: styles['list-item-root'] }}>
           <ListItemText primary={`等待時間： ${data.info.wait_time}`} />
         </ListItem>
-        <ListItem classes={{ root: styles['list-item-root'] }} button>
+        <ListItem classes={{ root: styles['list-item-root'] }}>
           <ListItemText primary={`執行狀態： ${convertStatus(data.info.state)}`} />
         </ListItem>
-        <ListItem classes={{ root: styles['list-item-root'] }} button>
+        <ListItem classes={{ root: styles['list-item-root'] }}>
           <ListItemText primary={`分散率： ${data.dispersion_rate} (node上有該job的worker / 一個job最少可以用幾個node就能跑)`} />
         </ListItem>
       </List>

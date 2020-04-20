@@ -72,6 +72,23 @@ class JobAllocation extends React.Component {
     }
     return result
   }
+
+  constructDataWithDummy(nodePods, jobNameList) {
+    if (nodePods === null) return
+    let totalPercentageNow = 0
+    let data = new Array(jobNameList.length).fill(0)
+
+    nodePods.forEach(pod => {
+      totalPercentageNow += pod.percentage
+      data[jobNameList.indexOf(pod.job_name)] += pod.percentage
+    })
+
+    // Add Dummy
+    data.push(100 - totalPercentageNow)
+
+    return data
+  }
+
   createChart() {
     const jobToColor = []
     const newChartData = this.state.data.map(node => {
@@ -83,11 +100,15 @@ class JobAllocation extends React.Component {
         }
       })
 
+      let bgColors = node.pods === null ? 'rgb(34, 37, 41)' : jobNameList.map(name => jobToColor.find(map => map[0] === name)[1])
+      if (node.pods !== null) bgColors.push('rgb(34, 37, 41)')
+      let labels = node.pods === null ? [ 'None' ] : jobNameList
+      if (node.pods !== null) labels.push("Unused")
       const data = {
-        labels: node.pods === null ? [ 'None' ] : jobNameList,
+        labels,
         datasets: [{
-          backgroundColor: node.pods === null ? 'rgba(62, 67, 74)' : jobNameList.map(name => jobToColor.find(map => map[0] === name)[1]),
-          data: node.pods === null ? [100] : jobNameList.map(_ => 100 / jobNameList.length)
+          backgroundColor: bgColors,
+          data: node.pods === null ? [100] : this.constructDataWithDummy(node.pods, jobNameList)
         }],
         tooltips: {
           callbacks: {
@@ -95,6 +116,7 @@ class JobAllocation extends React.Component {
               if (node.pods === null) {
                 return "Free"
               } else {
+                if (tooltip.index === data.datasets[tooltip.datasetIndex].data.length-1) return "Unused"
                 const jobName = data.labels[tooltip.index]
                 return `${jobName}: ${node.pods.filter(pod => pod.job_name === jobName).map(pod => `${pod.replica_type}-${pod.replca_index}`).join(', ')}`
               }
