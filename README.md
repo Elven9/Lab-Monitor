@@ -18,7 +18,7 @@ Before building a production code you need to set env in `.env.production`:
 ```
 # .env.production file in root directory
 REACT_APP_API_SERVER=localhost
-REACT_APP_PORT=9000
+REACT_APP_PORT=8080
 ```
 
 After setting up the env file, run `npm run build` and start a server:
@@ -31,9 +31,14 @@ You Can Use Docker to Build the Image, but the modification of `.env.production`
 
 
 ```shell
+# Build The Project
+npm run build
+
+# Build The Image
 docker build -t elven9/lab-monitor:latest
 
-docker run --rm -it -p 3000:3000 -e PORT=3000 elven9/lab-monitor:latest
+# Recommened Way to Run A Front-end Server
+docker run -d --name front-end-server -e PORT=3000 elven9/lab-monitor:latest
 ```
 
 
@@ -43,6 +48,7 @@ docker run --rm -it -p 3000:3000 -e PORT=3000 elven9/lab-monitor:latest
 "scripts": {
   "production": "node server.js",
   "start": "react-scripts start",
-  "build": "react-scripts build"
+  "build": "react-scripts build",
+  "docker-build": "npm run build && docker build -t elven9/lab-monitor:latest ."
 }
 ```

@@ -18,7 +18,8 @@
   "scripts": {
     "production": "node server.js",
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "docker-build": "npm run build && docker build -t elven9/lab-monitor:latest ."
   },
   "eslintConfig": {
     "extends": "react-app"
