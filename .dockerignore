@@ -1,4 +1,8 @@
 node_modules
-build
 .gitignore
 README.md
+src
+.env.development
+.env.production
+package-lock.json
+package.json
