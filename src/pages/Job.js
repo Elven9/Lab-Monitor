@@ -6,7 +6,7 @@ import JobList from '../components/JobPage/JobList'
 import JobTimeline from '../components/JobPage/JobTimeline'
 
 // Styles
-import styles from './page.module.scss'
+import styles from './Job.module.scss'
 
 class Job extends React.Component {
   render() {
@@ -23,6 +23,13 @@ class Job extends React.Component {
         <div className={styles.section}>
           <h1 className={styles.header}>Job Timeline</h1>
           <JobTimeline />
+        </div>
+        <div className={styles.section}>
+        <h1 className={styles.header}>Grafana Server</h1>
+          <iframe title="grafana-job-general-information-dashboard"
+                  src="http://localhost:8080/grafana/d/V4uokDgGz/jobs-general-information?orgId=1"
+                  frameBorder="0">
+          </iframe>
         </div>
       </div>
     )

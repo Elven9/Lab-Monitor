@@ -37,13 +37,21 @@ class SingleJob extends React.Component {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} id="single-job-page">
+        <div className={styles.section}>
+          <h1 className={styles.header}>Grafana</h1>
+          <iframe src={`http://localhost:8080/grafana/d/cm5qfNgGz/single-job-panel?orgId=1&var-jobName=${this.props.match.params.id}`}
+                  title="single-job-grafana-dashboard"
+                  frameBorder="0">
+          </iframe>
+        </div>
         <div className={styles.section}>
           <h1 className={styles.header}>Job Info</h1>
-          <div className={styles['split-panel']}>
+          <StaticInfo data={this.state.data} />
+          {/* <div className={styles['split-panel']}>
             <StaticInfo data={this.state.data} />
             <JobRadarChart data={this.state.data} node={this.state.nodeNameList} />
-          </div>
+          </div> */}
         </div>
       </div>
     )
